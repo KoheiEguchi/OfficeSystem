@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p>ログイン</p>
+	<p th:if=${msg}>[[${msg}]]</p>
+	<form th:action="@{/login}" th:object=${loginData} method="post">
+		<p>ログインID：<input type="text" name="loginId" placeholder="ログインID" autofocus></p>
+		<p>パスワード：<input type="password" name="password" placeholder="パスワード"></p>
+		<p><input type="submit" value="ログイン"></p>
+	</form>
+	<a th:href="@{/employeeCreate}"><input type="button" value="新規登録"></a>
+</body>
+</html>

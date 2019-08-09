@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p>社員一覧</p>
+	<form th:action="@{/employeeListSort}" method="post">
+		<p>並び替え</p>
+		<select name="sort">
+			<option value="position">役職順</option>
+			<option value="age">年齢順</option>
+			<option value="joinDate">入社日時順</option>
+			<option value="name">名前順</option>
+			<option value="department">所属部署順</option>
+		</select>
+		<p><input type="submit" value="並び替える"></p>
+	</form>
+	<div th:inline="text" th:each="employee: ${employeeList}" th:object="${employee}">
+		<p>氏名：[[*{familyName}]][[*{firstName}]]</p>
+		<p>読み：[[*{familyNameRuby}]][[*{firstNameRuby}]]</p>
+		<p>年齢：[[*{age}]]歳</p>
+		<p>所属部署：[[*{department}]]</p>
+		<p>役職：[[*{position}]]</p>
+		<p>入社日時：[[*{#calendars.format(joinDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+		<br>
+	</div>
+	<p><a th:href="@{/index}"><input type="button" value="戻る"></a></p>
+</body>
+</html>
