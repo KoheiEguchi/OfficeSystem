@@ -31,8 +31,10 @@ public class EmployeeCreate {
 		
 		String familyName = employeeCreateData.getFamilyName();
 		String firstName = employeeCreateData.getFirstName();
+		String familyNameRuby = employeeCreateData.getFamilyNameRuby();
+		String firstNameRuby = employeeCreateData.getFirstNameRuby();
 		//氏名が空欄の場合
-		if(familyName.equals("") || firstName.equals("")) {
+		if(familyName.equals("") || firstName.equals("") || familyNameRuby.equals("") || firstNameRuby.equals("")) {
 			formCheck = false;
 			model.addAttribute("nameCheck", true);
 		}
@@ -78,7 +80,9 @@ public class EmployeeCreate {
 		//全て正しく入力されていた場合
 		if(formCheck == true) {
 			String password = pass1;
-			employeeRep.employeeCreate(familyName, firstName, age, department, position, loginId, password);
+			employeeRep.employeeCreate(familyName, firstName, familyNameRuby, firstNameRuby, age, department, position, loginId, password);
+			model.addAttribute("msg", "社員を登録しました。");
+			
 			return "login";
 		//正しくない入力があった場合
 		}else {

@@ -17,13 +17,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	@Query(value = "SELECT id FROM employee WHERE login_id = :login_id AND password = :password", nativeQuery = true)
 	public Object loginCheck(String login_id, String password);
 	
-	//社員登録
-	@Modifying
-	@Query(value = 
-			"INSERT INTO employee (family_name, first_name, age, department, position, login_id, password) "
-			+ "VALUES (:family_name, :first_name, :age, :department, :position, :login_id, :password)", 
-					nativeQuery = true)
-	public void employeeCreate(String family_name, String first_name, int age, int department, int position, String login_id, String password);
+	//ログイン者が管理人か確認
+	@Query(value = "SELECT role FROM employee WHERE id = :id", nativeQuery = true)
+	public String checkRole(int id);
 	
 	//社員一覧取得
 	@Query(value = "SELECT * FROM employee ORDER BY position ASC", nativeQuery = true)
@@ -44,4 +40,22 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	//所属部署順に並び替え
 	@Query(value = "SELECT * FROM employee ORDER BY department ASC", nativeQuery = true)
 	public List<Employee> employeeSortDepartment();
+	
+	//社員登録
+	@Modifying
+	@Query(value = 
+			"INSERT INTO employee (family_name, first_name, family_name_ruby, first_name_ruby, age, department, position, login_id, password) "
+			+ "VALUES (:family_name, :first_name, :family_name_ruby, :first_name_ruby, :age, :department, :position, :login_id, :password)", 
+					nativeQuery = true)
+	public void employeeCreate(String family_name, String first_name, String family_name_ruby, String first_name_ruby, int age, 
+			int department, int position, String login_id, String password);
+	
+	//削除する社員の情報を取得
+	@Query(value = "SELECT * FROM employee WHERE id = :id", nativeQuery = true)
+	public List<Employee> employeeData(int id);
+	
+	//社員削除
+	@Modifying
+	@Query(value = "DELETE FROM employee WHERE id = :id", nativeQuery = true)
+	public void employeeDelete(int id);
 }

@@ -6,6 +6,7 @@
 </head>
 <body>
 	<p>社員一覧</p>
+	<p th:if="${employeeDelete == true}">社員を削除しました。</p>
 	<form th:action="@{/employeeListSort}" method="post">
 		<p>並び替え</p>
 		<select name="sort">
@@ -21,9 +22,10 @@
 		<p>氏名：[[*{familyName}]][[*{firstName}]]</p>
 		<p>読み：[[*{familyNameRuby}]][[*{firstNameRuby}]]</p>
 		<p>年齢：[[*{age}]]歳</p>
-		<p>所属部署：[[*{department}]]</p>
+		<p>所属部署：[[*{department}]]</p>  <!-- 所属部署と役職が数字で保存されているため名前表示に戻す必要あり -->
 		<p>役職：[[*{position}]]</p>
 		<p>入社日時：[[*{#calendars.format(joinDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+		<p th:if="${isAdmin == true}"><a th:href="@{/employeeDelete(employeeId=*{id})}"><input type="button" value="削除"></a></p>
 		<br>
 	</div>
 	<p><a th:href="@{/index}"><input type="button" value="戻る"></a></p>

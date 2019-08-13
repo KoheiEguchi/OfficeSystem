@@ -9,6 +9,7 @@
 	<form th:action="@{/employeeCreate}" th:object="${employeeCreateData}" method="post">
 		<p th:if="${nameCheck == true}">氏名を入力してください。</p>
 		<p>氏名：<input type="text" name="familyName" placeholder="姓" autofocus><input type="text" name="firstName" placeholder="名"></p>
+		<p>読み：<input type="text" name="familyNameRuby" placeholder="セイ"><input type="text" name="firstNameRuby" placeholder="メイ"></p>
 		<p th:if="${ageCheck == true}">年齢を選択してください。</p>
 		<p>年齢：
 			<select name="age">

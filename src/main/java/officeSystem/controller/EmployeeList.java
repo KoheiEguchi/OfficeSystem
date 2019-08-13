@@ -2,6 +2,8 @@ package officeSystem.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import officeSystem.repository.EmployeeRepository;
 @Controller
 public class EmployeeList {
 	@Autowired
+	HttpSession session;
+	@Autowired
 	EmployeeRepository employeeRep;
 	
 	//社員一覧ページを表示
@@ -23,6 +27,15 @@ public class EmployeeList {
 		//社員一覧取得
 		List<Employee> employeeList = employeeRep.allEmployee();
 		model.addAttribute("employeeList", employeeList);
+		
+		int viewerId = (int)session.getAttribute("viewerId");
+		//ログイン者が管理人か確認
+		String role = employeeRep.checkRole(viewerId);
+		//管理人だった場合
+		if(role.equals("admin")) {
+			model.addAttribute("isAdmin", true);
+		}
+		
 		return "employeeList";
 	}
 	
