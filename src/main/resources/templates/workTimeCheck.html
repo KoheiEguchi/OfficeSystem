@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p>出退勤管理</p>
+	<p th:if="${beginWorking == true}">おはようございます。</p>
+	<p th:if="${finishWorking == true}">お疲れ様でした。</p>
+	<div th:inline="text" th:each="employee: ${employeeList}" th:object="${employee}">
+		<p>氏名：[[*{familyName}]][[*{firstName}]]</p>
+		<p>読み：[[*{familyNameRuby}]][[*{firstNameRuby}]]</p>
+		<p>年齢：[[*{age}]]歳</p>
+		<p>所属部署：[[*{department}]]</p>  <!-- 所属部署と役職が数字で保存されているため名前表示に戻す必要あり -->
+		<p>役職：[[*{position}]]</p>
+		<form th:action="@{workTimeCheck}" method="post">
+			<input type="hidden" name="employeeId" th:value="*{id}">
+			<p th:if="*{working == 0}">
+				<input type="hidden" name="time" value="begin">
+				<input type="submit" value="出勤">
+			</p>
+			<p th:if="*{working == 1}">
+				<input type="hidden" name="time" value="finish">
+				<input type="submit" value="退勤">
+			</p>
+		</form>
+		<br>
+	</div>
+	<p th:if="${isAdmin == true}">
+		<p>出退勤状態</p>
+		<div th:inline="text" th:each="workTime: ${workTimeList}" th:object="${workTime}">
+			<p>日付：[[*{workDate}]]</p>
+			<p>社員：[[*{employeeId}]]</p>
+			<p>出勤時刻：[[*{beginTime}]]</p>
+			<p th:if="*{finishTime != null}">退勤時刻：[[*{finishTime}]]</p>
+			<p th:if="*{finishTime == null}">退勤時刻：就業中</p>
+			<br>
+		</div>
+	</p>
+	<p><a th:href="@{/index}"><input type="button" value="戻る"></a></p>
+</body>
+</html>

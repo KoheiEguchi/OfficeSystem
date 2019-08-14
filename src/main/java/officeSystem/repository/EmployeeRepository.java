@@ -41,6 +41,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	@Query(value = "SELECT * FROM employee ORDER BY department ASC", nativeQuery = true)
 	public List<Employee> employeeSortDepartment();
 	
+	//出退勤状態変更
+	@Modifying
+	@Query(value = "UPDATE employee SET working = :working WHERE id = :id", nativeQuery = true)
+	public void changeWorking(int working, int id);
+	
 	//社員登録
 	@Modifying
 	@Query(value = 

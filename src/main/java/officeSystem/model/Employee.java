@@ -59,6 +59,10 @@ public class Employee {
 	@Column(name = "join_date", nullable = false)
 	private Timestamp joinDate;
 	
+	//出退勤状態
+	@Column(name = "working", nullable = false)
+	private int working;
+	
 	//ログイン用ID
 	@Column(name = "login_id", nullable = false)
 	private String loginId;
