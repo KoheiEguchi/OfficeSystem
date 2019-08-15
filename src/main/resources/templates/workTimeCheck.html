@@ -27,8 +27,11 @@
 		</form>
 		<br>
 	</div>
-	<p th:if="${isAdmin == true}">
-		<p>出退勤状態</p>
+	<div th:if="${isAdmin == true}">
+		<form th:action="@{/workTimeCheck}" method="get">
+			<p>確認したい日付を選択してください：<input type="date" name="strDate"><input type="submit" value="選択"></p>
+		</form>
+		<p th:inline="text">[[${#calendars.format(workDate, 'yyyy年M月d日')}]]の出退勤状態</p>
 		<div th:inline="text" th:each="workTime: ${workTimeList}" th:object="${workTime}">
 			<p>日付：[[*{workDate}]]</p>
 			<p>社員：[[*{employeeId}]]</p>
@@ -37,7 +40,7 @@
 			<p th:if="*{finishTime == null}">退勤時刻：就業中</p>
 			<br>
 		</div>
-	</p>
+	</div>
 	<p><a th:href="@{/index}"><input type="button" value="戻る"></a></p>
 </body>
 </html>
