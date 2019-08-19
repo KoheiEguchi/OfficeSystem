@@ -17,8 +17,18 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query(value = "SELECT * FROM product", nativeQuery = true)
 	public List<Product> allProduct();
 	
+	//商品詳細取得
+	@Query(value = "SELECT * FROM product WHERE id = :id", nativeQuery = true)
+	public List<Product> getProductDetail(int id);
+	
 	//商品追加
 	@Modifying
 	@Query(value = "INSERT INTO product (name, quantity, place) VALUES (:name, :quantity, :place)", nativeQuery = true)
-	public void addProduct(String name, int quantity, int place);
+	public void addNewProduct(String name, int quantity, int place);
+	
+	//商品入出荷
+	@Modifying
+	@Query(value = "UPDATE product SET quantity = :quantity WHERE id = :product_id", nativeQuery = true)
+	public void updateQuantity(int quantity, int product_id);
+	
 }

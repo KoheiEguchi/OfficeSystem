@@ -6,19 +6,20 @@
 </head>
 <body>
 	<p>商品在庫一覧</p>
-	<p th:if="${msg != null}">[]</p>
+	<p th:if="${msg != null}">[[${msg}]]</p>
 	<div th:inline="text" th:each="product: ${productList}" th:object="${product}">
 		<p>商品名：[[*{name}]]</p>
 		<p>在庫数：[[*{quantity}]]個</p>
 		<p>管理場所：[[*{place}]]</p>
+		<p><a th:href="@{/productDetail(productId=*{id})}"><input type="button" value="この商品の詳細を見る"></a>
 		<br>
 	</div>
-	<form th:action="@{/addProduct}" method="post">
-		<p>商品追加</p>
+	<form th:action="@{/addNewProduct}" method="post">
+		<p>新商品追加</p>
 		<p th:if="${nameCheck == true}">商品名を入力してください。</p>
 		<p>商品名：<input type="text" name="name" placeholder="商品名"></p>
 		<p th:if="${quantityCheck == true}">入荷数を半角数字で入力してください。</p>
-		<p>入荷数(半角数字で記入)：<input type="text" name="strQuantity" placeholder="入荷数"></p>
+		<p>入荷数(半角数字で記入)：<input type="text" name="strQuantity" placeholder="入荷数">個</p>
 		<p th:if="${placeCheck == true}">管理場所を選択してください。</p>
 		<p>管理場所：
 			<select name="place">

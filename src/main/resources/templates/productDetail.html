@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p>商品詳細</p>
+	<p th:if="${msg != null}">[[${msg}]]</p>
+	<div th:inline="text" th:each="product: ${productDetail}" th:object="${product}">
+		<p>商品名：[[*{name}]]</p>
+		<p>在庫数：[[*{quantity}]]個</p>
+		<p>管理場所：[[*{place}]]</p>
+		<p>商品入出荷</p>
+		<form th:action="@{/transport}" method="post">
+			<input type="hidden" name="stock" th:value="*{quantity}">
+			<input type="hidden" name="productId" th:value="*{id}">
+			<p th:if="${quantityCheck == true}">個数を半角数字で入力してください。</p>
+			<p>個数(半角数字で記入)：<input type="text" name="strQuantity" placeholder="個数">個</p>
+			<p th:if="${rOrSCheck == true}">入出荷を選択してください。</p>
+			<p>
+				<input type="radio" name="rOrS" value="未選択" checked>未選択
+				<input type="radio" name="rOrS" value="入荷">入荷
+				<input type="radio" name="rOrS" value="出荷">出荷
+			</p>
+			<p><input type="submit" value="決定"></p>
+		</form>
+	</div>
+	<p>商品入出荷情報</p>
+	<div th:inline="text" th:each="transport: ${productTransport}" th:object="${transport}">
+		<p>日時：[[*{#calendars.format(transportDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
+		<p>担当者：[[*{employeeId}]]</p>
+		<p>[[*{rOrS}]]：[[*{quantity}]]個</p>
+		<br>
+	</div>
+	<p><a th:href="@{/productList}"><input type="button" value="戻る"></a></p>
+</body>
+</html>
