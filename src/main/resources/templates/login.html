@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<head th:replace="replace::head('ログイン')"></head>
 <body>
-	<p>ログイン</p>
-	<p th:if=${msg}>[[${msg}]]</p>
-	<form th:action="@{/login}" th:object=${loginData} method="post">
-		<p>ログインID：<input type="text" name="loginId" placeholder="ログインID" autofocus></p>
-		<p>パスワード：<input type="password" name="password" placeholder="パスワード"></p>
-		<p><input type="submit" value="ログイン"></p>
-	</form>
-	<a th:href="@{/employeeCreate}"><input type="button" value="新規登録"></a>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="h1 mt-5">ログイン</div>
+				<div th:replace="replace::msg"></div>
+			</div>
+			<div class="col-md-4 col-xs-1"></div>
+			<div class="col-md-4 col-xs-10">
+				<form th:action="@{/login}" th:object=${loginData} method="post">
+					<div class="row">
+						<div class="col-md-6 col-xs-12 text-left my-1">ログインID</div>
+						<div class="col-md-6 col-xs-12 text-right my-1"><input type="text" name="loginId" placeholder="ログインID" autofocus></div>
+						<div class="col-md-6 col-xs-12 text-left my-1">パスワード</div>
+						<div class="col-md-6 col-xs-12 text-right my-1"><input type="password" name="password" placeholder="パスワード"></div>
+					</div>
+					<input class="btn btn-primary shadow my-4" type="submit" value="ログイン">
+				</form>
+				<a th:href="@{/employeeCreate}"><input class="btn btn-success shadow" type="button" value="新規登録"></a>
+			</div>
+			<div class="col-md-4 col-xs-1"></div>
+		</div>
+	</div>
 </body>
 </html>

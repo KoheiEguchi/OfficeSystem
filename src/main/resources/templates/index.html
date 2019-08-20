@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<head th:replace="replace::head('目次')"></head>
 <body>
-	<p>目次</p>
-	<p><a th:href="@{/workTimeCheck}"><input type="button" value="出退勤管理"></a></p>
-	<p><a th:href="@{/productList}"><input type="button" value="商品在庫一覧"></a></p>
-	<p><a th:href="@{/employeeList}"><input type="button" value="社員一覧"></a></p>
-	<p><a th:href="@{/logout}"><input type="button" value="ログアウト"></a></p>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="h1 mt-5">目次</div>
+			</div>
+			<div class="col-4 bg-info indexLinkArea">
+				<a class="indexLink" th:href="@{/workTimeCheck}"><span class="h1 text-light">出退勤管理</span></a>
+			</div>
+			<div class="col-4 bg-success indexLinkArea">
+				<a class="indexLink" th:href="@{/productList}"><span class="h1 text-light">商品在庫一覧</span></a>
+			</div>
+			<div class="col-4 bg-warning indexLinkArea">
+				<a class="indexLink" th:href="@{/employeeList}"><span class="h1 text-dark">社員一覧</span></a>
+			</div>
+			<div class="col-12 mt-5">
+				<a th:href="@{/logout}"><input class="btn btn-secondary shadow" type="button" value="ログアウト"></a>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

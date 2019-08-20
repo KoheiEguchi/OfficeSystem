@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+/* 全体の構成 */
+html {
+	min-height: 100vh;
+}
+body {
+	width: 100%;
+    height: 100%;
+}
+
+/* 文を原則中央配置にする */
+div, p {
+	text-align: center;
+}
+
+/* メッセージの✖クリック時に周りの青枠消す */
+.close:active {
+	outline: none;
+}
+.indexLinkArea {
+	height: 300px;
+}
+.indexLink {
+	display: block;
+	height: 300px;
+}

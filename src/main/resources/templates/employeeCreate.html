@@ -1,96 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<head th:replace="replace::head('社員登録')"></head>
 <body>
-	<p>社員登録</p>
-	<form th:action="@{/employeeCreate}" th:object="${employeeCreateData}" method="post">
-		<p th:if="${nameCheck == true}">氏名を入力してください。</p>
-		<p>氏名：<input type="text" name="familyName" placeholder="姓" autofocus><input type="text" name="firstName" placeholder="名"></p>
-		<p>読み：<input type="text" name="familyNameRuby" placeholder="セイ"><input type="text" name="firstNameRuby" placeholder="メイ"></p>
-		<p th:if="${ageCheck == true}">年齢を選択してください。</p>
-		<p>年齢：
-			<select name="age">
-				<option value="0">-</option>
-				<option value="18">18</option>
-				<option value="19">19</option>
-				<option value="20">20</option>
-				<option value="21">21</option>
-				<option value="22">22</option>
-				<option value="23">23</option>
-				<option value="24">24</option>
-				<option value="25">25</option>
-				<option value="26">26</option>
-				<option value="27">27</option>
-				<option value="28">28</option>
-				<option value="29">29</option>
-				<option value="30">30</option>
-				<option value="31">31</option>
-				<option value="32">32</option>
-				<option value="33">33</option>
-				<option value="34">34</option>
-				<option value="35">35</option>
-				<option value="36">36</option>
-				<option value="37">37</option>
-				<option value="38">38</option>
-				<option value="39">39</option>
-				<option value="40">40</option>
-				<option value="41">41</option>
-				<option value="42">42</option>
-				<option value="43">43</option>
-				<option value="44">44</option>
-				<option value="45">45</option>
-				<option value="46">46</option>
-				<option value="47">47</option>
-				<option value="48">48</option>
-				<option value="49">49</option>
-				<option value="50">50</option>
-				<option value="51">51</option>
-				<option value="52">52</option>
-				<option value="53">53</option>
-				<option value="54">54</option>
-				<option value="55">55</option>
-				<option value="56">56</option>
-				<option value="57">57</option>
-				<option value="58">58</option>
-				<option value="59">59</option>
-				<option value="60">60</option>
-			</select>
-		歳</p>
-		<p th:if="${departmentCheck == true}">所属部署を選択してください。</p>
-		<p>所属部署：
-			<select name="department">
-				<option value="0">未選択</option>
-				<option value="1">経営部</option>
-				<option value="2">営業部</option>
-				<option value="3">製造部</option>
-				<option value="4">経理部</option>
-				<option value="5">人事部</option>
-			</select>
-		</p>
-		<p th:if="${positionCheck == true}">役職を選択してください。</p>
-		<p>役職：
-			<select name="position">
-				<option value="0">未選択</option>
-				<option value="1">社長</option>
-				<option value="2">副社長</option>
-				<option value="3">専務</option>
-				<option value="4">常務</option>
-				<option value="5">部長</option>
-				<option value="6">課長</option>
-				<option value="7">一般</option>
-			</select>
-		</p>
-		<p th:if="${loginIdCheck == true}">ログインIDを入力してください。</p>
-		<p>ログインID：<input type="text" name="loginId" placeholder="ログインID"></p>
-		<p th:if="${passNullCheck == true}">パスワードを両方入力してください。</p>
-		<p th:if="${passwordCheck == true}">パスワードは同じものを入力してください。</p>
-		<p>パスワード：<input type="password" name="pass1" placeholder="パスワード"></p>
-		<p>パスワード(確認)：<input type="password" name="pass2" placeholder="パスワード"></p>
-		<p><input type="submit" value="登録"></p>
-	</form>
-	<a th:href="@{/login}"><input type="button" value="戻る"></a>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="h1 mt-5">社員登録</div>
+			</div>
+			<div class="col-md-3 col-xs-1"></div>
+			<div class="col-md-6 col-xs-10">
+				<form th:action="@{/employeeCreate}" th:object="${employeeCreateData}" method="post">
+					<div class="row">
+						<div th:if="${nameCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('氏名を入力してください。')"></div>
+						</div>
+						<div class="col-md-2 col-xs-12 text-left my-1">氏名</div>
+						<div class="col-md-10 col-xs-12 text-right my-1">
+							<input type="text" name="familyName" placeholder="姓" autofocus>
+							<input class="ml-2" type="text" name="firstName" placeholder="名">
+						</div>
+						<div class="col-md-2 col-xs-12 text-left my-1">読み</div>
+						<div class="col-md-10 col-xs-12 text-right my-1">
+							<input type="text" name="familyNameRuby" placeholder="セイ">
+							<input class="ml-2" type="text" name="firstNameRuby" placeholder="メイ">
+						</div>
+						<div th:if="${ageCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('年齢を入力してください。')"></div>
+						</div>
+						<div class="col-md-6 col-xs-12 text-left my-1">年齢</div>
+						<div class="col-md-6 col-xs-12 text-right my-1"><span th:replace="replace::selectAge"></span>歳</div>
+						<div th:if="${departmentCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('所属部署を選択してください。')"></div>
+						</div>
+						<div class="col-md-6 col-xs-12 text-left my-1">所属部署</div>
+						<div class="col-md-6 col-xs-12 text-right my-1"><span th:replace="replace::selectDepartment"></span></div>
+						<div th:if="${positionCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('役職を選択してください。')"></div>
+						</div>
+						<div class="col-md-6 col-xs-12 text-left my-1">役職</div>
+						<div class="col-md-6 col-xs-12 text-right my-1"><span th:replace="replace::selectPosition"></span></div>
+						<div th:if="${loginIdCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('ログインIDを入力してください。')"></div>
+						</div>
+						<div class="col-md-6 col-xs-12 text-left my-1">ログインID</div>
+						<div class="col-md-6 col-xs-12 text-right my-1"><input type="text" name="loginId" placeholder="ログインID"></div>
+						<div th:if="${passNullCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('パスワードを両方入力してください。')"></div>
+						</div>
+						<div th:if="${passwordCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('パスワードは同じものを入力してください。')"></div>
+						</div>
+						<div class="col-md-6 col-xs-12 text-left my-1">パスワード</div>
+						<div class="col-md-6 col-xs-12 text-right my-1"><input type="password" name="pass1" placeholder="パスワード"></div>
+						<div class="col-md-6 col-xs-12 text-left my-1">パスワード(確認)</div>
+						<div class="col-md-6 col-xs-12 text-right my-1"><input type="password" name="pass2" placeholder="パスワード"></div>
+					</div>
+					<input class="btn btn-primary shadow my-4" type="submit" value="登録">
+				</form>
+				<a th:href="@{/login}"><input class="btn btn-success shadow mb-5" type="button" value="戻る"></a>
+			</div>
+			<div class="col-md-3 col-xs-1"></div>
+		</div>
+	</div>
 </body>
 </html>
