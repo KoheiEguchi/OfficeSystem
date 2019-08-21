@@ -22,24 +22,14 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	public String checkRole(int id);
 	
 	//社員一覧取得
-	@Query(value = "SELECT * FROM employee ORDER BY position ASC", nativeQuery = true)
+	@Query(value = "SELECT * FROM employee", nativeQuery = true)
 	public List<Employee> allEmployee();
 	
-	//役職順に並び替え
-	@Query(value = "SELECT * FROM employee ORDER BY position ASC", nativeQuery = true)
-	public List<Employee> employeeSortPosition();
-	//年齢順に並び替え
-	@Query(value = "SELECT * FROM employee ORDER BY age ASC", nativeQuery = true)
-	public List<Employee> employeeSortAge();
-	//入社日時順に並び替え
-	@Query(value = "SELECT * FROM employee ORDER BY join_date ASC", nativeQuery = true)
-	public List<Employee> employeeSortJoinDate();
-	//名前順に並び替え
-	@Query(value = "SELECT * FROM employee ORDER BY family_name_ruby ASC, first_name_ruby ASC", nativeQuery = true)
-	public List<Employee> employeeSortName();
-	//所属部署順に並び替え
-	@Query(value = "SELECT * FROM employee ORDER BY department ASC", nativeQuery = true)
-	public List<Employee> employeeSortDepartment();
+	//絞り込み
+	@Query(value = "SELECT * FROM employee WHERE family_name LIKE %:family_name% OR first_name LIKE %:first_name% OR age >= :age_min "
+			+ "OR age <= :age_max OR department = :department OR position = :position", 
+			nativeQuery = true)
+	public List<Employee> employeeRefine(String family_name, String first_name, int age_min, int age_max, String department, String position);
 	
 	//出退勤状態変更
 	@Modifying
@@ -53,7 +43,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 			+ "VALUES (:family_name, :first_name, :family_name_ruby, :first_name_ruby, :age, :department, :position, :login_id, :password)", 
 					nativeQuery = true)
 	public void employeeCreate(String family_name, String first_name, String family_name_ruby, String first_name_ruby, int age, 
-			int department, int position, String login_id, String password);
+			String department, String position, String login_id, String password);
 	
 	//削除する社員の情報を取得
 	@Query(value = "SELECT * FROM employee WHERE id = :id", nativeQuery = true)

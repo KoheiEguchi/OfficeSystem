@@ -47,13 +47,13 @@ public class Employee {
 	@Column(name = "age", nullable = false)
 	private int age;
 	
-	//所属部署
+	//所属部署s
 	@Column(name = "department", nullable = false)
-	private int department;
+	private String department;
 	
 	//役職
 	@Column(name = "position", nullable = false)
-	private int position;
+	private String position;
 	
 	//入社日時
 	@Column(name = "join_date", nullable = false)

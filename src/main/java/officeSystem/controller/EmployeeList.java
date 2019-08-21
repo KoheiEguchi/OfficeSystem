@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,34 +40,37 @@ public class EmployeeList {
 		return "employeeList";
 	}
 	
-	//社員一覧を並び替え
-	@PostMapping("/employeeListSort")
-	public String employeeListSort(@RequestParam("sort")String sort, Model model) {
-		List<Employee> employeeList = null;
-		
-		switch(sort) {
-		//役職順
-		case "position":
-			employeeList = employeeRep.employeeSortPosition();
-			break;
-		//年齢順
-		case "age":
-			employeeList = employeeRep.employeeSortAge();
-			break;
-		//入社日時順
-		case "joinDate":
-			employeeList = employeeRep.employeeSortJoinDate();
-			break;
-		//名前順
-		case "name":
-			employeeList = employeeRep.employeeSortName();
-			break;
-		//所属部署順
-		case "department":
-			employeeList = employeeRep.employeeSortDepartment();
-			break;
+	//社員一覧を絞り込み
+	@PostMapping("/employeeListRefine")
+	public String employeeListRefine(@RequestParam("refineFamilyName")String refinefamilyName, @RequestParam("refineFirstName")String refineFirstName, 
+			@RequestParam("refineAgeMin")String refineAgeMin, @RequestParam("refineAgeMax")String refineAgeMax, 
+			@RequestParam("department")String refineDepartment, @RequestParam("position")String refinePosition, 
+			Model model) {
+		int ageMin = 0;
+		int ageMax = 0;
+		//年齢に数字が入力されていない場合
+		if(StringUtils.isNumeric(refineAgeMin) == false || StringUtils.isNumeric(refineAgeMax) == false || ageMin > ageMax) {
+			//model.addAttribute("ageCheck", true);
+			ageMin = 18;
+			ageMax = 65;
+		//数字が入力されている場合
+		}else {
+			ageMin = Integer.parseInt(refineAgeMin);
+			ageMax = Integer.parseInt(refineAgeMax);
 		}
+			
+		//絞り込み
+		List<Employee> employeeList = 
+				employeeRep.employeeRefine(refinefamilyName, refineFirstName, ageMin, ageMax, refineDepartment, refinePosition);
 		model.addAttribute("employeeList", employeeList);
+		int viewerId = (int)session.getAttribute("viewerId");
+		//ログイン者が管理人か確認
+		String role = employeeRep.checkRole(viewerId);
+		//管理人だった場合
+		if(role.equals("admin")) {
+			model.addAttribute("isAdmin", true);
+		}
+		
 		return "employeeList";
 	}
 }

@@ -18,10 +18,3 @@ div, p {
 .close:active {
 	outline: none;
 }
-.indexLinkArea {
-	height: 300px;
-}
-.indexLink {
-	display: block;
-	height: 300px;
-}

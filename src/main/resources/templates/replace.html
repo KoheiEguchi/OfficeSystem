@@ -7,6 +7,7 @@
 	
 	<link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{css/original/common.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{css/original/index.css}">
 	<script type="text/javascript" th:src="@{webjars/jquery/1.12.4/jquery.min.js}"></script>
 	<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 	
@@ -77,30 +78,35 @@
 			<option value="58">58</option>
 			<option value="59">59</option>
 			<option value="60">60</option>
+			<option value="61">61</option>
+			<option value="62">62</option>
+			<option value="63">63</option>
+			<option value="64">64</option>
+			<option value="65">65</option>
 		</select>
 	</span>
 	<!--/* 所属部署選択 */-->
 	<span th:fragment="selectDepartment">
 		<select name="department">
-			<option value="0">未選択</option>
-			<option value="1">経営部</option>
-			<option value="2">営業部</option>
-			<option value="3">製造部</option>
-			<option value="4">経理部</option>
-			<option value="5">人事部</option>
+			<option value="未選択">未選択</option>
+			<option value="経営部">経営部</option>
+			<option value="営業部">営業部</option>
+			<option value="製造部">製造部</option>
+			<option value="経理部">経理部</option>
+			<option value="人事部">人事部</option>
 		</select>
 	</span>
 	<!--/* 役職選択 */-->
 	<span th:fragment="selectPosition">
 		<select name="position">
-			<option value="0">未選択</option>
-			<option value="1">社長</option>
-			<option value="2">副社長</option>
-			<option value="3">専務</option>
-			<option value="4">常務</option>
-			<option value="5">部長</option>
-			<option value="6">課長</option>
-			<option value="7">一般</option>
+			<option value="未選択">未選択</option>
+			<option value="社長">社長</option>
+			<option value="副社長">副社長</option>
+			<option value="専務">専務</option>
+			<option value="常務">常務</option>
+			<option value="部長">部長</option>
+			<option value="課長">課長</option>
+			<option value="一般">一般</option>
 		</select>
 	</span>
 </body>

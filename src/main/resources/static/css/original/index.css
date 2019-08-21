@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+/* 背景とリンクの範囲を一致させる */
+.indexColumn .col-4 {
+	padding: 0;
+}
+
+/* 背景の大きさ設定 */
+.indexLinkArea {
+	height: 300px;
+}
+
+/* 出退勤管理の背景色変化 */
+.indexWorkTime:hover {
+	background-color: #87cefa;
+}
+/* 商品在庫一覧の背景色変化 */
+.indexProduct:hover {
+	background-color: #32cd32;
+}
+/* 社員一覧の背景色変化 */
+.indexEmployee:hover {
+	background-color: #f0e68c;
+}
+
+/* リンク範囲内の設定 */
+.indexLink {
+	display: block;
+	height: 300px;
+	transition: all  0.3s ease;
+}
+/* ホバーでの下線消す */
+.indexLink:hover {
+	text-decoration: none;
+}
+
+/* リンク文の位置調整 */
+.indexLinkContent {
+	vertical-align: -140px;
+}

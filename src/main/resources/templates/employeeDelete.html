@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<head th:replace="replace::head('社員削除')"></head>
 <body>
-	<p>削除社員</p>
-	<p>こちらの社員を一覧から削除しますか？</p>
-	<div th:inline="text" th:each="employee: ${employeeData}" th:object="${employee}">
-		<p>氏名：[[*{familyName}]][[*{firstName}]]</p>
-		<p>読み：[[*{familyNameRuby}]][[*{firstNameRuby}]]</p>
-		<p>年齢：[[*{age}]]歳</p>
-		<p>所属部署：[[*{department}]]</p>  <!-- 所属部署と役職が数字で保存されているため名前表示に戻す必要あり -->
-		<p>役職：[[*{position}]]</p>
-		<p>入社日時：[[*{#calendars.format(joinDate, 'yyyy年M月d日 k時m分s秒')}]]</p>
-		<form th:action="@{/employeeDelete}" method="post">
-			<input type="hidden" name="employeeId" th:value="*{id}">
-			<input type="submit" value="削除する(戻せません！)">
-		</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="h1 mt-5">社員削除</div>
+				<div class="mt-4">こちらの社員を一覧から削除しますか？</div>
+			</div>
+			<div class="col-3"></div>
+			<div class="col-6">
+				<div th:inline="text" th:each="employee: ${employeeData}" th:object="${employee}">
+					<div class="row">
+						<div class="col-6 text-left my-1">氏名</div>
+						<div class="col-6 text-right my-1">[[*{familyName}]][[*{firstName}]]</div>
+						<div class="col-6 text-left my-1">読み</div>
+						<div class="col-6 text-right my-1">[[*{familyNameRuby}]][[*{firstNameRuby}]]</div>
+						<div class="col-6 text-left my-1">年齢</div>
+						<div class="col-6 text-right my-1">[[*{age}]]歳</div>
+						<div class="col-6 text-left my-1">所属部署</div>
+						<div class="col-6 text-right my-1">[[*{department}]]</div>  <!-- 所属部署と役職が数字で保存されているため名前表示に戻す必要あり -->
+						<div class="col-6 text-left my-1">役職</div>
+						<div class="col-6 text-right my-1">[[*{position}]]</div>
+						<div class="col-6 text-left my-1">入社日時</div>
+						<div class="col-6 text-right my-1">[[*{#calendars.format(joinDate, 'yyyy年M月d日 k時m分s秒')}]]</div>
+						<div class="col-12">
+							<form th:action="@{/employeeDelete}" method="post">
+								<input type="hidden" name="employeeId" th:value="*{id}">
+								<input class="btn btn-danger shadow mt-5" type="submit" value="削除する(戻せません！)">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-3"></div>
+			<div class="col-12">
+				<a th:href="@{/employeeList}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a>
+			</div>
+		</div>
 	</div>
-	<br>
-	<a th:href="@{/employeeList}"><input type="button" value="戻る"></a>
 </body>
 </html>

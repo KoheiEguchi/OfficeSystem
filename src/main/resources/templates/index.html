@@ -3,18 +3,18 @@
 <head th:replace="replace::head('目次')"></head>
 <body>
 	<div class="container">
-		<div class="row">
+		<div class="row indexColumn">
 			<div class="col-12">
 				<div class="h1 mt-5">目次</div>
 			</div>
 			<div class="col-4 bg-info indexLinkArea">
-				<a class="indexLink" th:href="@{/workTimeCheck}"><span class="h1 text-light">出退勤管理</span></a>
+				<a class="indexLink indexWorkTime" th:href="@{/workTimeCheck}"><span class="h1 text-light indexLinkContent">出退勤管理</span></a>
 			</div>
 			<div class="col-4 bg-success indexLinkArea">
-				<a class="indexLink" th:href="@{/productList}"><span class="h1 text-light">商品在庫一覧</span></a>
+				<a class="indexLink indexProduct" th:href="@{/productList}"><span class="h1 text-light indexLinkContent">商品在庫一覧</span></a>
 			</div>
 			<div class="col-4 bg-warning indexLinkArea">
-				<a class="indexLink" th:href="@{/employeeList}"><span class="h1 text-dark">社員一覧</span></a>
+				<a class="indexLink indexEmployee" th:href="@{/employeeList}"><span class="h1 text-dark indexLinkContent">社員一覧</span></a>
 			</div>
 			<div class="col-12 mt-5">
 				<a th:href="@{/logout}"><input class="btn btn-secondary shadow" type="button" value="ログアウト"></a>

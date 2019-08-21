@@ -46,16 +46,16 @@ public class EmployeeCreate {
 			model.addAttribute("ageCheck", true);
 		}
 		
-		int department = employeeCreateData.getDepartment();
+		String department = employeeCreateData.getDepartment();
 		//所属部署が未選択の場合
-		if(department == 0) {
+		if(department == "未選択") {
 			formCheck = false;
 			model.addAttribute("departmentCheck", true);
 		}
 		
-		int position = employeeCreateData.getPosition();
+		String position = employeeCreateData.getPosition();
 		//役職が未選択の場合
-		if(position == 0) {
+		if(position == "未選択") {
 			formCheck = false;
 			model.addAttribute("positionCheck", true);
 		}
