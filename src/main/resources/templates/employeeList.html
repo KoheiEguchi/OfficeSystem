@@ -12,19 +12,31 @@
 			<div class="col-3"></div>
 			<div class="col-6">
 				<form th:action="@{/employeeListRefine}" method="post">
-					<p>絞り込み</p>
-					<p>名前(全角カナ)：
-						<input type="text" name="refineFamilyName" placeholder="絞り込む姓"><input type="text" name="refineFirstName" placeholder="絞り込む名">
-					</p>
-					<div th:if="${ageCheck == true}" class="col-12 mt-4">
-						<div th:replace="replace::entryErr('年齢を入力してください。')"></div>
+					<div class="row">
+						<div class="col-12 h3">絞り込み</div>
+						<div th:if="${nameCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('名前を全角カナで入力してください。')"></div>
+						</div>
+						<div class="col-3 text-left">名前(全角カナ)</div>
+						<div class="col-9 text-right">
+							<input type="text" name="refineFamilyName" placeholder="絞り込む姓">
+							<input type="text" name="refineFirstName" placeholder="絞り込む名">
+						</div>
+						<div th:if="${ageCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('年齢の範囲を正しく入力してください。')"></div>
+						</div>
+						<div class="col-6 text-left">年齢(半角数字)</div>
+						<div class="col-6 text-right">
+							<select name="refineAgeMin"><option th:replace="replace::selectAge"></select>
+							<span class="mx-4">〜</span>
+							<select name="refineAgeMax"><option th:replace="replace::selectAge"></select>
+						</div>
+						<div class="col-6 text-left">所属部署</div>
+						<div class="col-6 text-right"><span th:replace="replace::selectDepartment"></span></div>
+						<div class="col-6 text-left">役職</div>
+						<div class="col-6 text-right"><span th:replace="replace::selectPosition"></span></div>
+						<div class="col-12 my-4"><input class="btn btn-primary shadow" type="submit" value="絞り込む"></div>
 					</div>
-					<p>年齢(半角数字)：
-						<input type="text" name="refineAgeMin" placeholder="年齢の下限"> 〜 <input type="text" name="refineAgeMax" placeholder="年齢の上限">
-					</p>
-					<p>所属部署：<span th:replace="replace::selectDepartment"></span></p>
-					<p>役職：<span th:replace="replace::selectPosition"></span></p>
-					<p class="my-4"><input class="btn btn-primary shadow" type="submit" value="絞り込む"></p>
 				</form>
 			</div>
 			<div class="col-3"></div>

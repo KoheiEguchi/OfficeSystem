@@ -1,10 +1,10 @@
 package officeSystem.controller;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,35 +42,54 @@ public class EmployeeList {
 	
 	//社員一覧を絞り込み
 	@PostMapping("/employeeListRefine")
-	public String employeeListRefine(@RequestParam("refineFamilyName")String refinefamilyName, @RequestParam("refineFirstName")String refineFirstName, 
-			@RequestParam("refineAgeMin")String refineAgeMin, @RequestParam("refineAgeMax")String refineAgeMax, 
+	public String employeeListRefine(@RequestParam("refineFamilyName")String refineFamilyName, @RequestParam("refineFirstName")String refineFirstName, 
+			@RequestParam("refineAgeMin")int refineAgeMin, @RequestParam("refineAgeMax")int refineAgeMax, 
 			@RequestParam("department")String refineDepartment, @RequestParam("position")String refinePosition, 
 			Model model) {
-		int ageMin = 0;
-		int ageMax = 0;
-		//年齢に数字が入力されていない場合
-		if(StringUtils.isNumeric(refineAgeMin) == false || StringUtils.isNumeric(refineAgeMax) == false || ageMin > ageMax) {
-			//model.addAttribute("ageCheck", true);
-			ageMin = 18;
-			ageMax = 65;
-		//数字が入力されている場合
-		}else {
-			ageMin = Integer.parseInt(refineAgeMin);
-			ageMax = Integer.parseInt(refineAgeMax);
-		}
-			
-		//絞り込み
-		List<Employee> employeeList = 
-				employeeRep.employeeRefine(refinefamilyName, refineFirstName, ageMin, ageMax, refineDepartment, refinePosition);
-		model.addAttribute("employeeList", employeeList);
-		int viewerId = (int)session.getAttribute("viewerId");
-		//ログイン者が管理人か確認
-		String role = employeeRep.checkRole(viewerId);
-		//管理人だった場合
-		if(role.equals("admin")) {
-			model.addAttribute("isAdmin", true);
+		boolean formCheck = true;
+		
+		//名前が全角カナでない場合
+		if(Pattern.matches("^[ァ-ヶー]*$", refineFamilyName) == false || Pattern.matches("^[ァ-ヶー]*$", refineFirstName) == false) {
+			formCheck = false;
+			model.addAttribute("nameCheck", true);
 		}
 		
+		//年齢上限が未指定の場合
+		if(refineAgeMax == 0) {
+			refineAgeMax = 65;
+		}
+		//年齢幅指定が逆の場合
+		if(refineAgeMin > refineAgeMax) {
+			formCheck = false;
+			model.addAttribute("ageCheck", true);
+		}
+		
+		//入力ミスがない場合
+		if(formCheck == true) {
+			//「未選択」を検索可能なよう書き換える
+			if(refineDepartment.equals("未選択")) {
+				refineDepartment = "";
+			}
+			if(refinePosition.equals("未選択")) {
+				refinePosition = "";
+			}
+			
+			//絞り込み
+			List<Employee> employeeList = 
+					employeeRep.employeeRefine(refineFamilyName, refineFirstName, refineAgeMin, refineAgeMax, refineDepartment, refinePosition);
+			model.addAttribute("employeeList", employeeList);  //絞り込みが起動しない
+			
+			int viewerId = (int)session.getAttribute("viewerId");
+			//ログイン者が管理人か確認
+			String role = employeeRep.checkRole(viewerId);
+			//管理人だった場合
+			if(role.equals("admin")) {
+				model.addAttribute("isAdmin", true);
+			}
+		//入力ミスがあった場合
+		}else {
+			employeeListOpen(model);
+		}
 		return "employeeList";
 	}
 }

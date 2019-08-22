@@ -1,46 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<head th:replace="replace::head('出退勤管理')"></head>
 <body>
-	<p>出退勤管理</p>
-	<p th:if="${beginWorking == true}">おはようございます。</p>
-	<p th:if="${finishWorking == true}">お疲れ様でした。</p>
-	<div th:inline="text" th:each="employee: ${employeeList}" th:object="${employee}">
-		<p>氏名：[[*{familyName}]][[*{firstName}]]</p>
-		<p>読み：[[*{familyNameRuby}]][[*{firstNameRuby}]]</p>
-		<p>年齢：[[*{age}]]歳</p>
-		<p>所属部署：[[*{department}]]</p>  <!-- 所属部署と役職が数字で保存されているため名前表示に戻す必要あり -->
-		<p>役職：[[*{position}]]</p>
-		<form th:action="@{workTimeCheck}" method="post">
-			<input type="hidden" name="employeeId" th:value="*{id}">
-			<p th:if="*{working == 0}">
-				<input type="hidden" name="time" value="begin">
-				<input type="submit" value="出勤">
-			</p>
-			<p th:if="*{working == 1}">
-				<input type="hidden" name="time" value="finish">
-				<input type="submit" value="退勤">
-			</p>
-		</form>
-		<br>
-	</div>
-	<div th:if="${isAdmin == true}">
-		<form th:action="@{/workTimeCheck}" method="get">
-			<p>確認したい日付を選択してください：<input type="date" name="strDate"><input type="submit" value="選択"></p>
-		</form>
-		<p th:inline="text">[[${#calendars.format(workDate, 'yyyy年M月d日')}]]の出退勤状態</p>
-		<div th:inline="text" th:each="workTime: ${workTimeList}" th:object="${workTime}">
-			<p>日付：[[*{workDate}]]</p>
-			<p>社員：[[*{employeeId}]]</p>
-			<p>出勤時刻：[[*{beginTime}]]</p>
-			<p th:if="*{finishTime != null}">退勤時刻：[[*{finishTime}]]</p>
-			<p th:if="*{finishTime == null}">退勤時刻：就業中</p>
-			<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="h1 mt-5">出退勤管理</div>
+			</div>
+			<div th:if="${beginWorking == true}" class="col-12 mt-4">
+				<div th:replace="replace::entryErr('おはようございます。')"></div>
+			</div>
+			<div th:if="${finishWorking == true}" class="col-12 mt-4">
+				<div th:replace="replace::entryErr('お疲れ様でした。')"></div>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-10">
+				<table class="table table-bordered table-hover">
+					<tr>
+						<th>氏名</th><th>読み</th><th>年齢</th><th>所属部署</th><th>役職</th><th>出退勤</th>
+					</tr>
+					<tr th:inline="text" th:each="employee: ${employeeList}" th:object="${employee}">
+						<td>[[*{familyName}]][[*{firstName}]]</td>
+						<td>[[*{familyNameRuby}]][[*{firstNameRuby}]]</td>
+						<td>[[*{age}]]歳</td>
+						<td>[[*{department}]]</td>
+						<td>[[*{position}]]</td>
+						<td>
+							<form th:action="@{workTimeCheck}" method="post">
+								<!-- <input type="hidden" name="employeeId" th:value="*{id}"> -->
+								<input type="hidden" name="familyName" th:value="*{familyName}">
+								<input type="hidden" name="firstName" th:value="*{firstName}">
+								<p th:if="*{working == 0}">
+									<input type="hidden" name="time" value="begin">
+									<input class="btn btn-info shadow" type="submit" value="出勤">
+								</p>
+								<p th:if="*{working == 1}">
+									<input type="hidden" name="time" value="finish">
+									<input class="btn btn-warning shadow" type="submit" value="退勤">
+								</p>
+							</form>
+						</td>
+					</tr>
+				</table>
+				<div th:if="${isAdmin == true}">
+					<div class="row">
+						<div class="col-12 my-4">
+							<form th:action="@{/workTimeCheck}" method="get">
+								確認したい日付を選択してください：
+								<input type="date" name="strDate"><input class="btn btn-primary shadow" type="submit" value="選択">
+							</form>
+						</div>
+						<div class="col-12 h4" th:inline="text">[[${#calendars.format(workDate, 'yyyy年M月d日')}]]の出退勤状態</div>
+					</div>
+					<table class="table table-bordered table-hover">
+						<tr>
+							<th>日付</th><th>社員</th><th>出勤時刻</th><th>退勤時刻</th>
+						</tr>
+						<tr th:inline="text" th:each="workTime: ${workTimeList}" th:object="${workTime}">
+							<td>[[*{workDate}]]</td>
+							<td>[[*{familyName}]][[*{firstName}]]</td>
+							<td>[[*{beginTime}]]</td>
+							<td th:if="*{finishTime != null}">[[*{finishTime}]]</td>
+							<td th:if="*{finishTime == null}">就業中</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-12 my-4"><a th:href="@{/index}"><input class="btn btn-secondary shadow" type="button" value="戻る"></a></div>
 		</div>
 	</div>
-	<p><a th:href="@{/index}"><input type="button" value="戻る"></a></p>
 </body>
 </html>

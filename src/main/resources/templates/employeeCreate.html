@@ -28,7 +28,9 @@
 							<div th:replace="replace::entryErr('年齢を入力してください。')"></div>
 						</div>
 						<div class="col-md-6 col-xs-12 text-left my-1">年齢</div>
-						<div class="col-md-6 col-xs-12 text-right my-1"><span th:replace="replace::selectAge"></span>歳</div>
+						<div class="col-md-6 col-xs-12 text-right my-1">
+							<select name="age"><option th:replace="replace::selectAge"></select>歳
+						</div>
 						<div th:if="${departmentCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('所属部署を選択してください。')"></div>
 						</div>

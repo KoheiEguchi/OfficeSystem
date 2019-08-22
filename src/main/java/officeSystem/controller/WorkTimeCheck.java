@@ -66,7 +66,7 @@ public class WorkTimeCheck {
 	
 	//出退勤時刻を記録
 	@PostMapping("/workTimeCheck")
-	public String workTimeCheck(int employeeId, String time, Model model) throws ParseException {
+	public String workTimeCheck(String familyName, String firstName, String time, Model model) throws ParseException {
 		//今日の日付を取得
 		Date fullToday = new Date();
 		Date today = DateUtils.truncate(fullToday, Calendar.DAY_OF_MONTH);
@@ -74,19 +74,19 @@ public class WorkTimeCheck {
 		int working = 0;
 		//出勤時の場合
 		if(time.equals("begin")) {
-			workTimeRep.beginWorking(today, employeeId);
+			workTimeRep.beginWorking(today, familyName, firstName);
 			model.addAttribute("beginWorking", true);
 			//出勤状態に変更
 			working = 1;
 		//退勤時の場合
 		}else {
-			workTimeRep.finishWorking(today, employeeId);
+			workTimeRep.finishWorking(today, familyName, firstName);
 			model.addAttribute("finishWorking", true);
 			//退勤状態に変更
 			working = 0;
 		}
 		//出退勤状態を変更
-		employeeRep.changeWorking(working, employeeId);
+		employeeRep.changeWorking(working, familyName, firstName);
 		
 		String strDate = null;
 		workTimeCheckOpen(strDate, model);

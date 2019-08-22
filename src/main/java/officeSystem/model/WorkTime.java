@@ -29,9 +29,11 @@ public class WorkTime {
 	@Column(name = "work_date", nullable = false)
 	private Date workDate;
 	
-	//社員番号
-	@Column(name = "employee_id", nullable = false)
-	private int employeeId;
+	//社員名
+	@Column(name = "family_name", nullable = false)
+	private String familyName;
+	@Column(name = "first_name", nullable = false)
+	private String firstName;
 	
 	//出勤時刻
 	@Column(name = "begin_time")

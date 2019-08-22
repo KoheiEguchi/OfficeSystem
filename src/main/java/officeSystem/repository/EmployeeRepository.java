@@ -26,15 +26,15 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	public List<Employee> allEmployee();
 	
 	//絞り込み
-	@Query(value = "SELECT * FROM employee WHERE family_name LIKE %:family_name% OR first_name LIKE %:first_name% OR age >= :age_min "
-			+ "OR age <= :age_max OR department = :department OR position = :position", 
+	@Query(value = "SELECT * FROM employee WHERE (family_name_ruby LIKE %:family_name% AND first_name_ruby LIKE %:first_name%) "
+			+ "AND (age BETWEEN :age_min AND :age_max) AND department = :department AND position = :position", 
 			nativeQuery = true)
 	public List<Employee> employeeRefine(String family_name, String first_name, int age_min, int age_max, String department, String position);
 	
 	//出退勤状態変更
 	@Modifying
-	@Query(value = "UPDATE employee SET working = :working WHERE id = :id", nativeQuery = true)
-	public void changeWorking(int working, int id);
+	@Query(value = "UPDATE employee SET working = :working WHERE family_name = :family_name AND first_name = :first_name", nativeQuery = true)
+	public void changeWorking(int working, String family_name, String first_name);
 	
 	//社員登録
 	@Modifying
