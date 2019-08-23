@@ -32,5 +32,5 @@ public class Product {
 	
 	//管理場所
 	@Column(name = "place", nullable = false)
-	private int place;
+	private String place;
 }

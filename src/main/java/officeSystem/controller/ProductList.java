@@ -29,7 +29,7 @@ public class ProductList {
 	
 	//新商品を追加
 	@PostMapping("addNewProduct")
-	public String addNewProduct(@RequestParam("name")String name, @RequestParam("strQuantity")String strQuantity, @RequestParam("place")int place, 
+	public String addNewProduct(@RequestParam("name")String name, @RequestParam("strQuantity")String strQuantity, @RequestParam("place")String place, 
 			Model model) {
 		// 入力ミスの確認用
 		boolean formCheck = true;
@@ -51,7 +51,7 @@ public class ProductList {
 		}
 		
 		//保管場所が未選択の場合
-		if(place == 0) {
+		if(place.equals("未選択")) {
 			formCheck = false;
 			model.addAttribute("placeCheck", true);
 		}

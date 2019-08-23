@@ -43,20 +43,24 @@
 			<div class="col-1"></div>
 			<div class="col-10">
 				<table class="table table-bordered table-hover">
-					<tr>
-						<th>氏名</th><th>読み</th><th>年齢</th><th>所属部署</th><th>役職</th><th>入社日時</th><th th:if="${isAdmin == true}"></th>
-					</tr>
-					<tr th:inline="text" th:each="employee: ${employeeList}" th:object="${employee}">
-						<td>[[*{familyName}]][[*{firstName}]]</td>
-						<td>[[*{familyNameRuby}]][[*{firstNameRuby}]]</td>
-						<td>[[*{age}]]歳</td>
-						<td>[[*{department}]]</td>
-						<td>[[*{position}]]</td>
-						<td>[[*{#calendars.format(joinDate, 'yyyy年M月d日 k時m分s秒')}]]</td>
-						<td th:if="${isAdmin == true}">
-							<a th:href="@{/employeeDelete(employeeId=*{id})}"><input class="btn btn-danger shadow" type="button" value="削除"></a>
-						</td>
-					</tr>
+					<thead>
+						<tr>
+							<th>氏名</th><th>読み</th><th>年齢</th><th>所属部署</th><th>役職</th><th>入社日時</th><th th:if="${isAdmin == true}"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:inline="text" th:each="employee: ${employeeList}" th:object="${employee}">
+							<td>[[*{familyName}]][[*{firstName}]]</td>
+							<td>[[*{familyNameRuby}]][[*{firstNameRuby}]]</td>
+							<td>[[*{age}]]歳</td>
+							<td>[[*{department}]]</td>
+							<td>[[*{position}]]</td>
+							<td>[[*{#calendars.format(joinDate, 'yyyy年M月d日 k時m分s秒')}]]</td>
+							<td th:if="${isAdmin == true}">
+								<a th:href="@{/employeeDelete(employeeId=*{id})}"><input class="btn btn-danger btn-sm shadow" type="button" value="削除"></a>
+							</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 			<div class="col-1"></div>

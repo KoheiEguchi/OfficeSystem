@@ -24,7 +24,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	//商品追加
 	@Modifying
 	@Query(value = "INSERT INTO product (name, quantity, place) VALUES (:name, :quantity, :place)", nativeQuery = true)
-	public void addNewProduct(String name, int quantity, int place);
+	public void addNewProduct(String name, int quantity, String place);
 	
 	//商品入出荷
 	@Modifying

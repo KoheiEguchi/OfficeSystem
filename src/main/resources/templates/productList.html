@@ -1,41 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<head th:replace="replace::head('商品在庫一覧')"></head>
 <body>
-	<p>商品在庫一覧</p>
-	<p th:if="${msg != null}">[[${msg}]]</p>
-	<div th:inline="text" th:each="product: ${productList}" th:object="${product}">
-		<p>商品名：[[*{name}]]</p>
-		<p>在庫数：[[*{quantity}]]個</p>
-		<p>管理場所：[[*{place}]]</p>
-		<p><a th:href="@{/productDetail(productId=*{id})}"><input type="button" value="この商品の詳細を見る"></a>
-		<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="h1 mt-5">商品在庫一覧</div>
+				<div th:replace="replace::msg"></div>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-10">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>商品名</th><th>在庫数</th><th>管理場所</th><th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:inline="text" th:each="product: ${productList}" th:object="${product}">
+							<td>[[*{name}]]</td>
+							<td>[[*{quantity}]]個</td>
+							<td>[[*{place}]]</td>
+							<td><a th:href="@{/productDetail(productId=*{id})}">
+								<input class="btn btn-info btn-sm shadow w-100" type="button" value="この商品の詳細を見る">
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<form th:action="@{/addNewProduct}" method="post">
+					<div class="row">
+						<div class="col-12 h4 my-4">新商品追加</div>
+						<div th:if="${nameCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('商品名を入力してください。')"></div>
+						</div>
+						<div class="col-2 text-left my-1">商品名</div>
+						<div class="col-10 text-right my-1"><input type="text" name="name" size="60" placeholder="商品名"></div>
+						<div th:if="${quantityCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('入荷数を半角数字で入力してください。')"></div>
+						</div>
+						<div class="col-6 text-left my-1">入荷数(半角数字で記入)</div>
+						<div class="col-6 text-right my-1"><input type="text" name="strQuantity" size="8" placeholder="入荷数">個</div>
+						<div th:if="${placeCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('管理場所を選択してください。')"></div>
+						</div>
+						<div class="col-6 text-left my-1">管理場所</div>
+						<div class="col-6 text-right my-1">
+							<select name="place">
+								<option value="未選択">未選択</option>
+								<option value="A1">A1</option>
+								<option value="A2">A2</option>
+								<option value="B1">B1</option>
+								<option value="B2">B2</option>
+								<option value="C1">C1</option>
+								<option value="C2">C2</option>
+								<option value="D1">D1</option>
+								<option value="D2">D2</option>
+							</select>
+						</div>
+						<div class="col-12"><input class="btn btn-primary shadow mt-5" type="submit" value="追加"></div>
+					</div>
+				</form>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-12"><a th:href="@{/index}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a></div>
+		</div>
 	</div>
-	<form th:action="@{/addNewProduct}" method="post">
-		<p>新商品追加</p>
-		<p th:if="${nameCheck == true}">商品名を入力してください。</p>
-		<p>商品名：<input type="text" name="name" placeholder="商品名"></p>
-		<p th:if="${quantityCheck == true}">入荷数を半角数字で入力してください。</p>
-		<p>入荷数(半角数字で記入)：<input type="text" name="strQuantity" placeholder="入荷数">個</p>
-		<p th:if="${placeCheck == true}">管理場所を選択してください。</p>
-		<p>管理場所：
-			<select name="place">
-				<option value="0">未選択</option>
-				<option value="1">A1</option>
-				<option value="2">A2</option>
-				<option value="3">B1</option>
-				<option value="4">B2</option>
-				<option value="5">C1</option>
-				<option value="6">C2</option>
-				<option value="7">D1</option>
-				<option value="8">D2</option>
-			</select>
-		</p>
-		<p><input type="submit" value="追加"></p>
-	</form>
-	<p><a th:href="@{/index}"><input type="button" value="戻る"></a></p>
 </body>
 </html>

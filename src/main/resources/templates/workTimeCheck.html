@@ -16,31 +16,34 @@
 			<div class="col-1"></div>
 			<div class="col-10">
 				<table class="table table-bordered table-hover">
-					<tr>
-						<th>氏名</th><th>読み</th><th>年齢</th><th>所属部署</th><th>役職</th><th>出退勤</th>
-					</tr>
-					<tr th:inline="text" th:each="employee: ${employeeList}" th:object="${employee}">
-						<td>[[*{familyName}]][[*{firstName}]]</td>
-						<td>[[*{familyNameRuby}]][[*{firstNameRuby}]]</td>
-						<td>[[*{age}]]歳</td>
-						<td>[[*{department}]]</td>
-						<td>[[*{position}]]</td>
-						<td>
-							<form th:action="@{workTimeCheck}" method="post">
-								<!-- <input type="hidden" name="employeeId" th:value="*{id}"> -->
-								<input type="hidden" name="familyName" th:value="*{familyName}">
-								<input type="hidden" name="firstName" th:value="*{firstName}">
-								<p th:if="*{working == 0}">
-									<input type="hidden" name="time" value="begin">
-									<input class="btn btn-info shadow" type="submit" value="出勤">
-								</p>
-								<p th:if="*{working == 1}">
-									<input type="hidden" name="time" value="finish">
-									<input class="btn btn-warning shadow" type="submit" value="退勤">
-								</p>
-							</form>
-						</td>
-					</tr>
+					<thead>
+						<tr>
+							<th>氏名</th><th>読み</th><th>年齢</th><th>所属部署</th><th>役職</th><th>出退勤</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:inline="text" th:each="employee: ${employeeList}" th:object="${employee}">
+							<td>[[*{familyName}]][[*{firstName}]]</td>
+							<td>[[*{familyNameRuby}]][[*{firstNameRuby}]]</td>
+							<td>[[*{age}]]歳</td>
+							<td>[[*{department}]]</td>
+							<td>[[*{position}]]</td>
+							<td>
+								<form th:action="@{workTimeCheck}" method="post">
+									<input type="hidden" name="familyName" th:value="*{familyName}">
+									<input type="hidden" name="firstName" th:value="*{firstName}">
+									<div th:if="*{working == 0}">
+										<input type="hidden" name="time" value="begin">
+										<input class="btn btn-info btn-sm shadow w-100" type="submit" value="出勤">
+									</div>
+									<div th:if="*{working == 1}">
+										<input type="hidden" name="time" value="finish">
+										<input class="btn btn-warning btn-sm shadow w-100" type="submit" value="退勤">
+									</div>
+								</form>
+							</td>
+						</tr>
+					</tbody>
 				</table>
 				<div th:if="${isAdmin == true}">
 					<div class="row">
@@ -53,16 +56,20 @@
 						<div class="col-12 h4" th:inline="text">[[${#calendars.format(workDate, 'yyyy年M月d日')}]]の出退勤状態</div>
 					</div>
 					<table class="table table-bordered table-hover">
-						<tr>
-							<th>日付</th><th>社員</th><th>出勤時刻</th><th>退勤時刻</th>
-						</tr>
-						<tr th:inline="text" th:each="workTime: ${workTimeList}" th:object="${workTime}">
-							<td>[[*{workDate}]]</td>
-							<td>[[*{familyName}]][[*{firstName}]]</td>
-							<td>[[*{beginTime}]]</td>
-							<td th:if="*{finishTime != null}">[[*{finishTime}]]</td>
-							<td th:if="*{finishTime == null}">就業中</td>
-						</tr>
+						<thead>
+							<tr>
+								<th>日付</th><th>社員</th><th>出勤時刻</th><th>退勤時刻</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:inline="text" th:each="workTime: ${workTimeList}" th:object="${workTime}">
+								<td>[[*{workDate}]]</td>
+								<td>[[*{familyName}]][[*{firstName}]]</td>
+								<td>[[*{beginTime}]]</td>
+								<td th:if="*{finishTime != null}">[[*{finishTime}]]</td>
+								<td th:if="*{finishTime == null}">就業中</td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 			</div>
