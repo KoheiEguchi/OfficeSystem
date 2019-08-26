@@ -44,8 +44,8 @@ public class ProductDetail {
 	@PostMapping("transport")
 	public String transport(@RequestParam("stock")int stock, @RequestParam("productId")int productId, 
 			@RequestParam("strQuantity")String strQuantity, @RequestParam("rOrS")String rOrS, Model model) {
-		//担当者の番号を取得
-		int viewerId = (int)session.getAttribute("viewerId");
+		//担当者名を取得
+		String viewerName = (String)session.getAttribute("viewerName");
 		
 		// 入力ミスの確認用
 		boolean formCheck = true;
@@ -84,7 +84,7 @@ public class ProductDetail {
 			//商品入出荷
 			productRep.updateQuantity(newQuantity, productId);
 			//入出荷情報記録
-			transportRep.addTransportData(productId, viewerId, rOrS, quantity);
+			transportRep.addTransportData(productId, viewerName, rOrS, quantity);
 			model.addAttribute("msg", "個数を変更しました。");
 		}
 		productDetailOpen(productId, model);

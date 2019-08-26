@@ -23,15 +23,14 @@
 					</thead>
 					<tbody>
 						<tr th:inline="text" th:each="employee: ${employeeList}" th:object="${employee}">
-							<td>[[*{familyName}]][[*{firstName}]]</td>
-							<td>[[*{familyNameRuby}]][[*{firstNameRuby}]]</td>
+							<td>[[*{name}]]</td>
+							<td>[[*{nameRuby}]]</td>
 							<td>[[*{age}]]歳</td>
 							<td>[[*{department}]]</td>
 							<td>[[*{position}]]</td>
 							<td>
 								<form th:action="@{workTimeCheck}" method="post">
-									<input type="hidden" name="familyName" th:value="*{familyName}">
-									<input type="hidden" name="firstName" th:value="*{firstName}">
+									<input type="hidden" name="name" th:value="*{name}">
 									<div th:if="*{working == 0}">
 										<input type="hidden" name="time" value="begin">
 										<input class="btn btn-info btn-sm shadow w-100" type="submit" value="出勤">
@@ -64,7 +63,7 @@
 						<tbody>
 							<tr th:inline="text" th:each="workTime: ${workTimeList}" th:object="${workTime}">
 								<td>[[*{workDate}]]</td>
-								<td>[[*{familyName}]][[*{firstName}]]</td>
+								<td>[[*{name}]]</td>
 								<td>[[*{beginTime}]]</td>
 								<td th:if="*{finishTime != null}">[[*{finishTime}]]</td>
 								<td th:if="*{finishTime == null}">就業中</td>

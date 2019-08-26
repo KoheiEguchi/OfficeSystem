@@ -30,10 +30,8 @@ public class WorkTime {
 	private Date workDate;
 	
 	//社員名
-	@Column(name = "family_name", nullable = false)
-	private String familyName;
-	@Column(name = "first_name", nullable = false)
-	private String firstName;
+	@Column(name = "name", nullable = false)
+	private String name;
 	
 	//出勤時刻
 	@Column(name = "begin_time")

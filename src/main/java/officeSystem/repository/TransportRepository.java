@@ -19,7 +19,7 @@ public interface TransportRepository extends JpaRepository<Transport, Integer> {
 	
 	//入出荷情報記録
 	@Modifying
-	@Query(value = "INSERT INTO transport (product_id, employee_id, r_or_s, quantity) VALUES (:product_id, :employee_id, :r_or_s, :quantity)", 
+	@Query(value = "INSERT INTO transport (product_id, employee_name, r_or_s, quantity) VALUES (:product_id, :employee_name, :r_or_s, :quantity)", 
 	nativeQuery = true)
-	public void addTransportData(int product_id, int employee_id, String r_or_s, int quantity);
+	public void addTransportData(int product_id, String employee_name, String r_or_s, int quantity);
 }

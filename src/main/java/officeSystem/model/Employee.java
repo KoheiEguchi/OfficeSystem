@@ -29,19 +29,12 @@ public class Employee {
 	@Column(name = "id")
 	private int id;
 	
-	//姓
-	@Column(name = "family_name", nullable = false)
-	private String familyName;
-	//名
-	@Column(name = "first_name", nullable = false)
-	private String firstName;
-	
-	//姓(ルビ)
-	@Column(name = "family_name_ruby", nullable = false)
-	private String familyNameRuby;
-	//名(ルビ)
-	@Column(name = "first_name_ruby", nullable = false)
-	private String firstNameRuby;
+	//名前
+	@Column(name = "name", nullable = false)
+	private String name;
+	//名前(ルビ)
+	@Column(name = "name_ruby", nullable = false)
+	private String nameRuby;
 	
 	//年齢
 	@Column(name = "age", nullable = false)

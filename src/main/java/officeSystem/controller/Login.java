@@ -42,6 +42,10 @@ public class Login {
 			int viewerId = ((Integer) loginCheck).intValue();
 			//ログイン者のIDをセッションに登録
 			session.setAttribute("viewerId", viewerId);
+			//ログイン者の名前をセッションに登録
+			String viewerName = employeeRep.getViewerName(viewerId);
+			session.setAttribute("viewerName", viewerName);
+			
 			index.indexOpen();
 			return "index";
 		}

@@ -42,14 +42,14 @@ public class EmployeeList {
 	
 	//社員一覧を絞り込み
 	@PostMapping("/employeeListRefine")
-	public String employeeListRefine(@RequestParam("refineFamilyName")String refineFamilyName, @RequestParam("refineFirstName")String refineFirstName, 
-			@RequestParam("refineAgeMin")int refineAgeMin, @RequestParam("refineAgeMax")int refineAgeMax, 
+	public String employeeListRefine(
+			@RequestParam("refineName")String refineName, @RequestParam("refineAgeMin")int refineAgeMin, @RequestParam("refineAgeMax")int refineAgeMax, 
 			@RequestParam("department")String refineDepartment, @RequestParam("position")String refinePosition, 
 			Model model) {
 		boolean formCheck = true;
 		
 		//名前が全角カナでない場合
-		if(Pattern.matches("^[ァ-ヶー]*$", refineFamilyName) == false || Pattern.matches("^[ァ-ヶー]*$", refineFirstName) == false) {
+		if(Pattern.matches("^[ァ-ヶー]*$", refineName) == false) {
 			formCheck = false;
 			model.addAttribute("nameCheck", true);
 		}
@@ -76,7 +76,7 @@ public class EmployeeList {
 			
 			//絞り込み
 			List<Employee> employeeList = 
-					employeeRep.employeeRefine(refineFamilyName, refineFirstName, refineAgeMin, refineAgeMax, refineDepartment, refinePosition);
+					employeeRep.employeeRefine(refineName, refineAgeMin, refineAgeMax, refineDepartment, refinePosition);
 			model.addAttribute("employeeList", employeeList);  //絞り込みが起動しない
 			
 			int viewerId = (int)session.getAttribute("viewerId");

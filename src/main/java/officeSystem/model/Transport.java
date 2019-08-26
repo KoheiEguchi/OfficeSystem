@@ -32,9 +32,9 @@ public class Transport {
 	@Column(name = "transport_date", nullable = false)
 	private Timestamp transportDate;
 	
-	//社員番号
-	@Column(name = "employee_id", nullable = false)
-	private int employeeId;
+	//社員名
+	@Column(name = "employee_name", nullable = false)
+	private String employeeName;
 	
 	//入出荷選択
 	@Column(name = "r_or_s", nullable = false)

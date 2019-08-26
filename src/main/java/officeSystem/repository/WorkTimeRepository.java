@@ -20,13 +20,11 @@ public interface WorkTimeRepository extends JpaRepository<WorkTime, Integer> {
 	
 	//出勤時刻記録
 	@Modifying
-	@Query(value = "INSERT INTO work_time (work_date, family_name, first_name, begin_time) VALUES (:work_date, :family_name, :first_name, now())", 
-		nativeQuery = true)
-	public void beginWorking(Date work_date, String family_name, String first_name);
+	@Query(value = "INSERT INTO work_time (work_date, name, begin_time) VALUES (:work_date, :name, now())", nativeQuery = true)
+	public void beginWorking(Date work_date, String name);
 	
 	//退勤時刻記録
 	@Modifying
-	@Query(value = "UPDATE work_time SET finish_time = now() WHERE work_date = :work_date AND family_name = :family_name AND first_name = :first_name", 
-		nativeQuery = true)
-	public void finishWorking(Date work_date, String family_name, String first_name);
+	@Query(value = "UPDATE work_time SET finish_time = now() WHERE work_date = :work_date AND name = :name", nativeQuery = true)
+	public void finishWorking(Date work_date, String name);
 }

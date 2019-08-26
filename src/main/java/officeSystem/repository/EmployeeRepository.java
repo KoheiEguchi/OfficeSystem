@@ -21,29 +21,32 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	@Query(value = "SELECT role FROM employee WHERE id = :id", nativeQuery = true)
 	public String checkRole(int id);
 	
+	//セッション用にログイン者の名前取得
+	@Query(value = "SELECT name FROM employee WHERE id = :id", nativeQuery = true)
+	public String getViewerName(int id);
+	
 	//社員一覧取得
 	@Query(value = "SELECT * FROM employee", nativeQuery = true)
 	public List<Employee> allEmployee();
 	
 	//絞り込み
-	@Query(value = "SELECT * FROM employee WHERE (family_name_ruby LIKE %:family_name% AND first_name_ruby LIKE %:first_name%) "
-			+ "AND (age BETWEEN :age_min AND :age_max) AND department = :department AND position = :position", 
+	@Query(value = "SELECT * FROM employee "
+			+ "WHERE name_ruby LIKE %:name% AND (age BETWEEN :age_min AND :age_max) AND department = :department AND position = :position", 
 			nativeQuery = true)
-	public List<Employee> employeeRefine(String family_name, String first_name, int age_min, int age_max, String department, String position);
+	public List<Employee> employeeRefine(String name, int age_min, int age_max, String department, String position);
 	
 	//出退勤状態変更
 	@Modifying
-	@Query(value = "UPDATE employee SET working = :working WHERE family_name = :family_name AND first_name = :first_name", nativeQuery = true)
-	public void changeWorking(int working, String family_name, String first_name);
+	@Query(value = "UPDATE employee SET working = :working WHERE name = :name", nativeQuery = true)
+	public void changeWorking(int working, String name);
 	
 	//社員登録
 	@Modifying
 	@Query(value = 
-			"INSERT INTO employee (family_name, first_name, family_name_ruby, first_name_ruby, age, department, position, login_id, password) "
-			+ "VALUES (:family_name, :first_name, :family_name_ruby, :first_name_ruby, :age, :department, :position, :login_id, :password)", 
+			"INSERT INTO employee (name, name_ruby, age, department, position, login_id, password) "
+			+ "VALUES (:name, :name_ruby, :age, :department, :position, :login_id, :password)", 
 					nativeQuery = true)
-	public void employeeCreate(String family_name, String first_name, String family_name_ruby, String first_name_ruby, int age, 
-			String department, String position, String login_id, String password);
+	public void employeeCreate(String name, String name_ruby, int age, String department, String position, String login_id, String password);
 	
 	//削除する社員の情報を取得
 	@Query(value = "SELECT * FROM employee WHERE id = :id", nativeQuery = true)

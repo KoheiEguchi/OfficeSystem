@@ -19,8 +19,7 @@
 						</div>
 						<div class="col-3 text-left">名前(全角カナ)</div>
 						<div class="col-9 text-right">
-							<input type="text" name="refineFamilyName" placeholder="絞り込む姓">
-							<input type="text" name="refineFirstName" placeholder="絞り込む名">
+							<input type="text" name="refineName" placeholder="絞り込む名前">
 						</div>
 						<div th:if="${ageCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('年齢の範囲を正しく入力してください。')"></div>
@@ -50,8 +49,8 @@
 					</thead>
 					<tbody>
 						<tr th:inline="text" th:each="employee: ${employeeList}" th:object="${employee}">
-							<td>[[*{familyName}]][[*{firstName}]]</td>
-							<td>[[*{familyNameRuby}]][[*{firstNameRuby}]]</td>
+							<td>[[*{name}]]</td>
+							<td>[[*{nameRuby}]]</td>
 							<td>[[*{age}]]歳</td>
 							<td>[[*{department}]]</td>
 							<td>[[*{position}]]</td>

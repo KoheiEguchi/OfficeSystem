@@ -16,13 +16,11 @@
 						</div>
 						<div class="col-md-2 col-xs-12 text-left my-1">氏名</div>
 						<div class="col-md-10 col-xs-12 text-right my-1">
-							<input type="text" name="familyName" placeholder="姓" autofocus>
-							<input class="ml-2" type="text" name="firstName" placeholder="名">
+							<input type="text" name="name" placeholder="氏名" autofocus>
 						</div>
 						<div class="col-md-2 col-xs-12 text-left my-1">読み</div>
 						<div class="col-md-10 col-xs-12 text-right my-1">
-							<input type="text" name="familyNameRuby" placeholder="セイ">
-							<input class="ml-2" type="text" name="firstNameRuby" placeholder="メイ">
+							<input type="text" name="nameRuby" placeholder="シメイ">
 						</div>
 						<div th:if="${ageCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('年齢を入力してください。')"></div>
