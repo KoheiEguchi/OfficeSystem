@@ -32,7 +32,7 @@ public class EmployeeDelete {
 	@PostMapping("/employeeDelete")
 	public String employeeDelete(int employeeId, Model model) {
 		employeeRep.employeeDelete(employeeId);
-		model.addAttribute("employeeDelete", true);
+		model.addAttribute("msg", "社員を削除しました。");
 		
 		employeeList.employeeListOpen(model);
 		return "employeeList";

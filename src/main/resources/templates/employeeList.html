@@ -6,8 +6,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="h1 mt-5">社員一覧</div>
-				<br>
-				<div th:if="${employeeDelete == true}">社員を削除しました。</div>
+				<div th:replace="replace::msg"></div>
 			</div>
 			<div class="col-3"></div>
 			<div class="col-6">
@@ -17,23 +16,23 @@
 						<div th:if="${nameCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('名前を全角カナで入力してください。')"></div>
 						</div>
-						<div class="col-3 text-left">名前(全角カナ)</div>
-						<div class="col-9 text-right">
+						<div class="col-3 text-left my-1">名前(全角カナ)</div>
+						<div class="col-9 text-right my-1">
 							<input type="text" name="refineName" placeholder="絞り込む名前">
 						</div>
 						<div th:if="${ageCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('年齢の範囲を正しく入力してください。')"></div>
 						</div>
-						<div class="col-6 text-left">年齢(半角数字)</div>
-						<div class="col-6 text-right">
+						<div class="col-6 text-left my-1">年齢(半角数字)</div>
+						<div class="col-6 text-right my-1">
 							<select name="refineAgeMin"><option th:replace="replace::selectAge"></select>
 							<span class="mx-4">〜</span>
 							<select name="refineAgeMax"><option th:replace="replace::selectAge"></select>
 						</div>
-						<div class="col-6 text-left">所属部署</div>
-						<div class="col-6 text-right"><span th:replace="replace::selectDepartment"></span></div>
-						<div class="col-6 text-left">役職</div>
-						<div class="col-6 text-right"><span th:replace="replace::selectPosition"></span></div>
+						<div class="col-6 text-left my-1">所属部署</div>
+						<div class="col-6 text-right my-1"><span th:replace="replace::selectDepartment"></span></div>
+						<div class="col-6 text-left my-1">役職</div>
+						<div class="col-6 text-right my-1"><span th:replace="replace::selectPosition"></span></div>
 						<div class="col-12 my-4"><input class="btn btn-primary shadow" type="submit" value="絞り込む"></div>
 					</div>
 				</form>
@@ -44,7 +43,7 @@
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>氏名</th><th>読み</th><th>年齢</th><th>所属部署</th><th>役職</th><th>入社日時</th><th th:if="${isAdmin == true}"></th>
+							<th>氏名</th><th>読み</th><th>年齢</th><th>所属部署</th><th>役職</th><th>入社日時</th><th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -55,15 +54,20 @@
 							<td>[[*{department}]]</td>
 							<td>[[*{position}]]</td>
 							<td>[[*{#calendars.format(joinDate, 'yyyy年M月d日 k時m分s秒')}]]</td>
-							<td th:if="${isAdmin == true}">
-								<a th:href="@{/employeeDelete(employeeId=*{id})}"><input class="btn btn-danger btn-sm shadow" type="button" value="削除"></a>
+							<td>
+								<a th:href="@{/employeeDetail(employeeId=*{id})}">
+									<input class="btn btn-success btn-sm shadow w-100" type="button" value="詳細">
+								</a>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+				<div th:if="${noEmployee == true}">
+					<div class="h5">条件に当てはまる社員はおりませんでした。</div>
+				</div>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-12"><a th:href="@{/index}"><input class="btn btn-secondary shadow" type="button" value="戻る"></a></div>
+			<div class="col-12"><a th:href="@{/index}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a></div>
 		</div>
 	</div>
 </body>

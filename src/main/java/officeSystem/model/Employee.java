@@ -40,7 +40,7 @@ public class Employee {
 	@Column(name = "age", nullable = false)
 	private int age;
 	
-	//所属部署s
+	//所属部署
 	@Column(name = "department", nullable = false)
 	private String department;
 	

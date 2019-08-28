@@ -18,6 +18,10 @@ public interface WorkTimeRepository extends JpaRepository<WorkTime, Integer> {
 	@Query(value = "SELECT * FROM work_time WHERE work_date = :work_date", nativeQuery = true)
 	public List<WorkTime> getWorkTime(Date work_date);
 	
+	//社員の出退勤情報取得
+	@Query(value = "SELECT * FROM work_time WHERE name = :name", nativeQuery = true)
+	public List<WorkTime> employeeWorked(String name);
+	
 	//出勤時刻記録
 	@Modifying
 	@Query(value = "INSERT INTO work_time (work_date, name, begin_time) VALUES (:work_date, :name, now())", nativeQuery = true)

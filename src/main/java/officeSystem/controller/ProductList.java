@@ -18,7 +18,7 @@ public class ProductList {
 	@Autowired
 	ProductRepository productRep;
 	
-	//商品在庫一覧ページを表示
+	//商品管理ページを表示
 	@GetMapping("productList")
 	public String productListOpen(Model model) {
 		//商品一覧取得

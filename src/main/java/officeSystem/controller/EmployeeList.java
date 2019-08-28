@@ -75,9 +75,12 @@ public class EmployeeList {
 			}
 			
 			//絞り込み
-			List<Employee> employeeList = 
-					employeeRep.employeeRefine(refineName, refineAgeMin, refineAgeMax, refineDepartment, refinePosition);
-			model.addAttribute("employeeList", employeeList);  //絞り込みが起動しない
+			List<Employee> employeeList = employeeRep.employeeRefine(refineName, refineAgeMin, refineAgeMax, refineDepartment, refinePosition);
+			model.addAttribute("employeeList", employeeList);
+			//誰も該当しなかった場合
+			if(employeeList.isEmpty()) {
+				model.addAttribute("noEmployee", true);
+			}
 			
 			int viewerId = (int)session.getAttribute("viewerId");
 			//ログイン者が管理人か確認

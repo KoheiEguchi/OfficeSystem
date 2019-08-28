@@ -21,17 +21,17 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	@Query(value = "SELECT role FROM employee WHERE id = :id", nativeQuery = true)
 	public String checkRole(int id);
 	
-	//セッション用にログイン者の名前取得
+	//IDから名前取得
 	@Query(value = "SELECT name FROM employee WHERE id = :id", nativeQuery = true)
 	public String getViewerName(int id);
 	
 	//社員一覧取得
 	@Query(value = "SELECT * FROM employee", nativeQuery = true)
 	public List<Employee> allEmployee();
-	
+	 
 	//絞り込み
 	@Query(value = "SELECT * FROM employee "
-			+ "WHERE name_ruby LIKE %:name% AND (age BETWEEN :age_min AND :age_max) AND department = :department AND position = :position", 
+			+ "WHERE name_ruby LIKE %:name% AND (age BETWEEN :age_min AND :age_max) AND department LIKE %:department% AND position LIKE %:position%", 
 			nativeQuery = true)
 	public List<Employee> employeeRefine(String name, int age_min, int age_max, String department, String position);
 	
@@ -48,7 +48,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 					nativeQuery = true)
 	public void employeeCreate(String name, String name_ruby, int age, String department, String position, String login_id, String password);
 	
-	//削除する社員の情報を取得
+	//社員の情報を取得
 	@Query(value = "SELECT * FROM employee WHERE id = :id", nativeQuery = true)
 	public List<Employee> employeeData(int id);
 	
