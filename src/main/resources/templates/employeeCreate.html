@@ -12,15 +12,15 @@
 				<form th:action="@{/employeeCreate}" th:object="${employeeCreateData}" method="post">
 					<div class="row">
 						<div th:if="${nameCheck == true}" class="col-12 mt-4">
-							<div th:replace="replace::entryErr('氏名を入力してください。')"></div>
+							<div th:replace="replace::entryErr(名前を入力してください。')"></div>
 						</div>
-						<div class="col-md-2 col-xs-12 text-left my-1">氏名</div>
+						<div class="col-md-2 col-xs-12 text-left my-1">名前</div>
 						<div class="col-md-10 col-xs-12 text-right my-1">
-							<input type="text" name="name" placeholder="氏名" autofocus>
+							<input type="text" name="name" placeholder="名前" autofocus>
 						</div>
 						<div class="col-md-2 col-xs-12 text-left my-1">読み</div>
 						<div class="col-md-10 col-xs-12 text-right my-1">
-							<input type="text" name="nameRuby" placeholder="シメイ">
+							<input type="text" name="nameRuby" placeholder="ナマエ">
 						</div>
 						<div th:if="${ageCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('年齢を入力してください。')"></div>
@@ -57,7 +57,7 @@
 					</div>
 					<input class="btn btn-primary shadow my-4" type="submit" value="登録">
 				</form>
-				<a th:href="@{/login}"><input class="btn btn-success shadow mb-5" type="button" value="戻る"></a>
+				<a th:href="@{/login}"><input class="btn btn-secondary shadow mb-5" type="button" value="戻る"></a>
 			</div>
 			<div class="col-md-3 col-xs-1"></div>
 		</div>

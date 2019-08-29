@@ -15,18 +15,22 @@
 					<div class="col-6">
 						<div th:inline="text" th:each="employee: ${employeeData}" th:object="${employee}">
 							<div class="row">
-								<div class="col-6 text-left my-1">名前</div>
-								<div class="col-6 text-right my-1">[[*{name}]]</div>
-								<div class="col-6 text-left my-1">読み</div>
-								<div class="col-6 text-right my-1">[[*{nameRuby}]]</div>
-								<div class="col-6 text-left my-1">年齢</div>
-								<div class="col-6 text-right my-1">[[*{age}]]</div>
-								<div class="col-6 text-left my-1">所属部署</div>
-								<div class="col-6 text-right my-1">[[*{department}]]</div>
-								<div class="col-6 text-left my-1">役職</div>
-								<div class="col-6 text-right my-1">[[*{position}]]</div>
+								<div class="col-6 text-left my-1 border-bottom">名前</div>
+								<div class="col-6 text-right my-1 border-bottom">[[*{name}]]</div>
+								<div class="col-6 text-left my-1 border-bottom">読み</div>
+								<div class="col-6 text-right my-1 border-bottom">[[*{nameRuby}]]</div>
+								<div class="col-6 text-left my-1 border-bottom">年齢</div>
+								<div class="col-6 text-right my-1 border-bottom">[[*{age}]]</div>
+								<div class="col-6 text-left my-1 border-bottom">所属部署</div>
+								<div class="col-6 text-right my-1 border-bottom">[[*{department}]]</div>
+								<div class="col-6 text-left my-1 border-bottom">役職</div>
+								<div class="col-6 text-right my-1 border-bottom">[[*{position}]]</div>
 								<div class="col-12">
 									<div th:if="${isAdmin == true}">
+										<a th:href="@{/employeeUpdate(employeeId=*{id})}">
+											<input class="btn btn-info shadow my-4" type="button" value="情報を書き換える">
+										</a>
+										<br>
 										<a th:href="@{/employeeDelete(employeeId=*{id})}">
 											<input class="btn btn-danger shadow my-4" type="button" value="社員を削除する">
 										</a>

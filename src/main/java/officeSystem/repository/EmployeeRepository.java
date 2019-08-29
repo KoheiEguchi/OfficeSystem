@@ -52,6 +52,13 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	@Query(value = "SELECT * FROM employee WHERE id = :id", nativeQuery = true)
 	public List<Employee> employeeData(int id);
 	
+	//社員情報更新
+	@Modifying
+	@Query(value = 
+			"UPDATE employee SET name = :name, name_ruby = :name_ruby, age = :age, department = :department, position = :position, "
+			+ "login_id = :login_id, password = :password WHERE id = :id", nativeQuery = true)
+	public void employeeUpdate(String name, String name_ruby, int age, String department, String position, String login_id, String password, int id);
+	
 	//社員削除
 	@Modifying
 	@Query(value = "DELETE FROM employee WHERE id = :id", nativeQuery = true)

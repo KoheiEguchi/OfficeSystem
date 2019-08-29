@@ -47,7 +47,13 @@
 												<input class="hideRadio" type="radio" name="rOrS" value="出荷">出荷
 											</label>
 										</div>
-										<div class="col-12"><input class="btn btn-primary shadow" type="submit" value="決定"></div>
+										<div class="col-12">
+											<input class="btn btn-primary shadow" type="submit" value="決定">
+											<br>
+											<a th:href="@{/productUpdate(productId=*{id})}">
+												<input class="btn btn-info shadow my-4" type="button" value="情報を書き換える">
+											</a>
+										</div>
 									</form>
 								</div>
 							</div>
