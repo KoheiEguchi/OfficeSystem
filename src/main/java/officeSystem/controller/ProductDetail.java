@@ -2,8 +2,6 @@ package officeSystem.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +14,12 @@ import officeSystem.model.Product;
 import officeSystem.model.Transport;
 import officeSystem.repository.ProductRepository;
 import officeSystem.repository.TransportRepository;
+import officeSystem.service.Common;
 
 @Controller
 public class ProductDetail {
 	@Autowired
-	HttpSession session;
+	Common common;
 	@Autowired
 	ProductRepository productRep;
 	@Autowired
@@ -29,15 +28,29 @@ public class ProductDetail {
 	//商品詳細ページを表示
 	@GetMapping("productDetail")
 	public String productDetailOpen(@RequestParam("productId")int productId, Model model) {
-		//商品詳細取得
-		List<Product> productDetail = productRep.getProductDetail(productId);
-		model.addAttribute("productDetail", productDetail);
-		
-		//商品入出荷情報取得
-		List<Transport> productTransport = transportRep.getProductTransport(productId);
-		model.addAttribute("productTransport", productTransport);
-		
-		return "productDetail";
+		//ログイン確認
+		int viewerId = common.isLogin(model);
+		//ログインしていない場合
+		if(viewerId == 0) {
+			return "login";
+		//ログインしている場合
+		}else {
+			//ログイン者が管理人か確認
+			boolean isAdmin = common.isAdmin(model);
+			if(isAdmin == true) {
+				//管理人である
+			}
+			
+			//商品詳細取得
+			List<Product> productDetail = productRep.getProductDetail(productId);
+			model.addAttribute("productDetail", productDetail);
+			
+			//商品入出荷情報取得
+			List<Transport> productTransport = transportRep.getProductTransport(productId);
+			model.addAttribute("productTransport", productTransport);
+			
+			return "productDetail";
+		}
 	}
 	
 	//入出荷
@@ -45,7 +58,7 @@ public class ProductDetail {
 	public String transport(@RequestParam("stock")int stock, @RequestParam("productId")int productId, 
 			@RequestParam("strQuantity")String strQuantity, @RequestParam("rOrS")String rOrS, Model model) {
 		//担当者名を取得
-		String viewerName = (String)session.getAttribute("viewerName");
+		String viewerName = common.getViewerName();
 		
 		// 入力ミスの確認用
 		boolean formCheck = true;

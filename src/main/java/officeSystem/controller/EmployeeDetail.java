@@ -2,8 +2,6 @@ package officeSystem.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +12,12 @@ import officeSystem.model.Employee;
 import officeSystem.model.WorkTime;
 import officeSystem.repository.EmployeeRepository;
 import officeSystem.repository.WorkTimeRepository;
+import officeSystem.service.Common;
 
 @Controller
 public class EmployeeDetail {
 	@Autowired
-	HttpSession session;
+	Common common;
 	@Autowired
 	EmployeeRepository employeeRep;
 	@Autowired
@@ -27,23 +26,29 @@ public class EmployeeDetail {
 	//社員詳細ページを開く
 	@GetMapping("/employeeDetail")
 	public String employeeDetailOpen(@RequestParam("employeeId")int employeeId, Model model) {
-		//社員の情報を取得
-		List<Employee> employeeData = employeeRep.employeeData(employeeId);
-		model.addAttribute("employeeData", employeeData);
-		
-		//社員の出退勤情報取得
-		String employeeName = employeeRep.getViewerName(employeeId);
-		List<WorkTime> employeeWorked = workTimeRep.employeeWorked(employeeName);
-		model.addAttribute("employeeWorked", employeeWorked);
-		
-		int viewerId = (int)session.getAttribute("viewerId");
-		//ログイン者が管理人か確認
-		String role = employeeRep.checkRole(viewerId);
-		//管理人だった場合
-		if(role.equals("admin")) {
-			model.addAttribute("isAdmin", true);
+		//ログイン確認
+		int viewerId = common.isLogin(model);
+		//ログインしていない場合
+		if(viewerId == 0) {
+			return "login";
+		//ログインしている場合
+		}else {
+			//社員の情報を取得
+			List<Employee> employeeData = employeeRep.employeeData(employeeId);
+			model.addAttribute("employeeData", employeeData);
+			
+			//社員の出退勤情報取得
+			String employeeName = employeeRep.getViewerName(employeeId);
+			List<WorkTime> employeeWorked = workTimeRep.employeeWorked(employeeName);
+			model.addAttribute("employeeWorked", employeeWorked);
+			
+			//ログイン者が管理人か確認
+			boolean isAdmin = common.isAdmin(model);
+			if(isAdmin == true) {
+				//管理人である
+			}
+			
+			return "employeeDetail";
 		}
-		
-		return "employeeDetail";
 	}
 }

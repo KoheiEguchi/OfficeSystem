@@ -27,39 +27,41 @@
 						</tr>
 					</tbody>
 				</table>
-				<form th:action="@{/addNewProduct}" method="post">
-					<div class="row">
-						<div class="col-12 h4 my-4">新商品追加</div>
-						<div th:if="${nameCheck == true}" class="col-12 mt-4">
-							<div th:replace="replace::entryErr('商品名を入力してください。')"></div>
+				<div th:if="${isAdmin == true}">
+					<form th:action="@{/addNewProduct}" method="post">
+						<div class="row">
+							<div class="col-12 h4 my-4">新商品追加</div>
+							<div th:if="${nameCheck == true}" class="col-12 mt-4">
+								<div th:replace="replace::entryErr('商品名を入力してください。')"></div>
+							</div>
+							<div class="col-2 text-left my-1">商品名</div>
+							<div class="col-10 text-right my-1"><input type="text" name="name" size="60" placeholder="商品名"></div>
+							<div th:if="${quantityCheck == true}" class="col-12 mt-4">
+								<div th:replace="replace::entryErr('入荷数を半角数字で入力してください。')"></div>
+							</div>
+							<div class="col-6 text-left my-1">入荷数(半角数字で記入)</div>
+							<div class="col-6 text-right my-1"><input type="text" name="strQuantity" size="8" placeholder="入荷数">個</div>
+							<div th:if="${placeCheck == true}" class="col-12 mt-4">
+								<div th:replace="replace::entryErr('管理場所を選択してください。')"></div>
+							</div>
+							<div class="col-6 text-left my-1">管理場所</div>
+							<div class="col-6 text-right my-1">
+								<select name="place">
+									<option value="未選択">未選択</option>
+									<option value="A1">A1</option>
+									<option value="A2">A2</option>
+									<option value="B1">B1</option>
+									<option value="B2">B2</option>
+									<option value="C1">C1</option>
+									<option value="C2">C2</option>
+									<option value="D1">D1</option>
+									<option value="D2">D2</option>
+								</select>
+							</div>
+							<div class="col-12"><input class="btn btn-primary shadow mt-5" type="submit" value="追加"></div>
 						</div>
-						<div class="col-2 text-left my-1">商品名</div>
-						<div class="col-10 text-right my-1"><input type="text" name="name" size="60" placeholder="商品名"></div>
-						<div th:if="${quantityCheck == true}" class="col-12 mt-4">
-							<div th:replace="replace::entryErr('入荷数を半角数字で入力してください。')"></div>
-						</div>
-						<div class="col-6 text-left my-1">入荷数(半角数字で記入)</div>
-						<div class="col-6 text-right my-1"><input type="text" name="strQuantity" size="8" placeholder="入荷数">個</div>
-						<div th:if="${placeCheck == true}" class="col-12 mt-4">
-							<div th:replace="replace::entryErr('管理場所を選択してください。')"></div>
-						</div>
-						<div class="col-6 text-left my-1">管理場所</div>
-						<div class="col-6 text-right my-1">
-							<select name="place">
-								<option value="未選択">未選択</option>
-								<option value="A1">A1</option>
-								<option value="A2">A2</option>
-								<option value="B1">B1</option>
-								<option value="B2">B2</option>
-								<option value="C1">C1</option>
-								<option value="C2">C2</option>
-								<option value="D1">D1</option>
-								<option value="D2">D2</option>
-							</select>
-						</div>
-						<div class="col-12"><input class="btn btn-primary shadow mt-5" type="submit" value="追加"></div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-12"><a th:href="@{/index}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a></div>

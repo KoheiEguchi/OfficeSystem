@@ -3,8 +3,6 @@ package officeSystem.controller;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,30 +12,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import officeSystem.model.Employee;
 import officeSystem.repository.EmployeeRepository;
+import officeSystem.service.Common;
 
 @Controller
 public class EmployeeList {
 	@Autowired
-	HttpSession session;
+	Common common;
 	@Autowired
 	EmployeeRepository employeeRep;
 	
 	//社員一覧ページを表示
 	@GetMapping("/employeeList")
 	public String employeeListOpen(Model model) {
-		//社員一覧取得
-		List<Employee> employeeList = employeeRep.allEmployee();
-		model.addAttribute("employeeList", employeeList);
-		
-		int viewerId = (int)session.getAttribute("viewerId");
-		//ログイン者が管理人か確認
-		String role = employeeRep.checkRole(viewerId);
-		//管理人だった場合
-		if(role.equals("admin")) {
-			model.addAttribute("isAdmin", true);
+		//ログイン確認
+		int viewerId = common.isLogin(model);
+		//ログインしていない場合
+		if(viewerId == 0) {
+			return "login";
+		//ログインしている場合
+		}else {
+			//社員一覧取得
+			List<Employee> employeeList = employeeRep.allEmployee();
+			model.addAttribute("employeeList", employeeList);
+			
+			return "employeeList";
 		}
-		
-		return "employeeList";
 	}
 	
 	//社員一覧を絞り込み
@@ -82,12 +81,9 @@ public class EmployeeList {
 				model.addAttribute("noEmployee", true);
 			}
 			
-			int viewerId = (int)session.getAttribute("viewerId");
-			//ログイン者が管理人か確認
-			String role = employeeRep.checkRole(viewerId);
-			//管理人だった場合
-			if(role.equals("admin")) {
-				model.addAttribute("isAdmin", true);
+			boolean isAdmin = common.isAdmin(model);
+			if(isAdmin == true) {
+				//管理人である
 			}
 		//入力ミスがあった場合
 		}else {

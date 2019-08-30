@@ -12,23 +12,42 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import officeSystem.model.Employee;
 import officeSystem.repository.EmployeeRepository;
+import officeSystem.service.Common;
 
 @Controller
 public class EmployeeUpdate {
 	@Autowired
 	EmployeeDetail employeeDetail;
 	@Autowired
+	Common common;
+	@Autowired
 	EmployeeRepository employeeRep;
 	
 	//社員情報更新ページを開く
 	@GetMapping("/employeeUpdate")
 	public String employeeUpdateOpen(@RequestParam("employeeId")int employeeId, Model model) {
-		//社員の情報を取得
-		List<Employee> employeeData = employeeRep.employeeData(employeeId);
-		model.addAttribute("employeeData", employeeData);
-		model.addAttribute("employeeId", employeeId);
-		
-		return "employeeUpdate";
+		//ログイン確認
+		int viewerId = common.isLogin(model);
+		//ログインしていない場合
+		if(viewerId == 0) {
+			return "login";
+		//ログインしている場合
+		}else {
+			//管理人専用ページを開いて良いか確認
+			boolean admin = common.isOpenAdminPage(model);
+			//管理人でない場合
+			if(admin == false) {
+				return "index";
+			//管理人の場合
+			}else {
+				//社員の情報を取得
+				List<Employee> employeeData = employeeRep.employeeData(employeeId);
+				model.addAttribute("employeeData", employeeData);
+				model.addAttribute("employeeId", employeeId);
+				
+				return "employeeUpdate";
+			}
+		}
 	}
 	
 	//社員情報を更新する

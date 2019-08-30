@@ -50,9 +50,17 @@
 										<div class="col-12">
 											<input class="btn btn-primary shadow" type="submit" value="決定">
 											<br>
-											<a th:href="@{/productUpdate(productId=*{id})}">
-												<input class="btn btn-info shadow my-4" type="button" value="情報を書き換える">
-											</a>
+											<div th:if="${isAdmin == true}">
+												<a th:href="@{/productUpdate(productId=*{id})}">
+													<input class="btn btn-info shadow my-4" type="button" value="情報を書き換える">
+												</a>
+												<div th:if="*{quantity == 0}">
+													<a th:href="@{/productDelete(productId=*{id})}">
+														<input class="btn btn-danger shadow my-4" type="button" value="商品を削除する">
+													</a>
+												</div>
+												<br>
+											</div>
 										</div>
 									</form>
 								</div>

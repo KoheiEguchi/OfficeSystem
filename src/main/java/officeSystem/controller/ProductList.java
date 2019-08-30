@@ -12,19 +12,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import officeSystem.model.Product;
 import officeSystem.repository.ProductRepository;
+import officeSystem.service.Common;
 
 @Controller
 public class ProductList {
+	@Autowired
+	Common common;
 	@Autowired
 	ProductRepository productRep;
 	
 	//商品管理ページを表示
 	@GetMapping("productList")
 	public String productListOpen(Model model) {
-		//商品一覧取得
-		List<Product> productList = productRep.allProduct();
-		model.addAttribute("productList", productList);
-		return "productList";
+		//ログイン確認
+		int viewerId = common.isLogin(model);
+		//ログインしていない場合
+		if(viewerId == 0) {
+			return "login";
+		//ログインしている場合
+		}else {
+			//商品一覧取得
+			List<Product> productList = productRep.allProduct();
+			model.addAttribute("productList", productList);
+			
+			//ログイン者が管理人か確認
+			boolean isAdmin = common.isAdmin(model);
+			if(isAdmin == true) {
+				//管理人である
+			}
+			
+			return "productList";
+		}
 	}
 	
 	//新商品を追加

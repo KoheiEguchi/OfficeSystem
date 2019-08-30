@@ -46,7 +46,7 @@ public class Login {
 			String viewerName = employeeRep.getViewerName(viewerId);
 			session.setAttribute("viewerName", viewerName);
 			
-			index.indexOpen();
+			index.indexOpen(model);
 			return "index";
 		}
 	}

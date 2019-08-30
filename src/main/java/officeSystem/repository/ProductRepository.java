@@ -31,4 +31,14 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query(value = "UPDATE product SET quantity = :quantity WHERE id = :product_id", nativeQuery = true)
 	public void updateQuantity(int quantity, int product_id);
 	
+	//商品情報更新
+	@Modifying
+	@Query(value = "UPDATE product SET name = :name, place = :place WHERE id = :id", nativeQuery = true)
+	public void productUpdate(String name, String place, int id);
+	
+	//商品削除
+	@Modifying
+	@Query(value = "DELETE FROM product WHERE id = :id", nativeQuery = true)
+	public void productDelete(int id);
+	
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="replace::head('商品削除')"></head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="h1 mt-5">商品削除</div>
+				<div class="mt-4">こちらの商品を一覧から削除しますか？</div>
+			</div>
+			<div class="col-3"></div>
+			<div class="col-6">
+				<div th:inline="text" th:each="product: ${productDetail}" th:object="${product}">
+					<div class="row">
+						<div class="col-2 text-left my-1 border-bottom">商品名</div>
+						<div class="col-10 text-right my-1 border-bottom">[[*{name}]]</div>
+						<div class="col-6 text-left my-1 border-bottom">在庫数</div>
+						<div class="col-6 text-right my-1 border-bottom">[[*{quantity}]]個</div>
+						<div class="col-6 text-left my-1 border-bottom">管理場所</div>
+						<div class="col-6 text-right my-1 border-bottom">[[*{place}]]</div>
+						<div class="col-12">
+							<form th:action="@{/productDelete}" method="post">
+								<input type="hidden" name="productId" th:value="*{id}">
+								<input class="btn btn-danger shadow mt-5" type="submit" value="削除する(戻せません！)">
+							</form>
+							<a th:href="@{/productDetail(productId=*{id})}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-3"></div>
+		</div>
+	</div>
+</body>
+</html>
