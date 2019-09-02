@@ -1,4 +1,4 @@
-package officeSystem.controller;
+package officeSystem.controller.productList;
 
 import java.util.List;
 

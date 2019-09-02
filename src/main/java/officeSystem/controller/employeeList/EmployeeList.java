@@ -1,4 +1,4 @@
-package officeSystem.controller;
+package officeSystem.controller.employeeList;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -35,6 +35,13 @@ public class EmployeeList {
 			List<Employee> employeeList = employeeRep.allEmployee();
 			model.addAttribute("employeeList", employeeList);
 			
+			/*ここからJavaScript用*/
+			//絞り込み時の選択肢初期化用
+			model.addAttribute("name", "");
+			model.addAttribute("ageMin", 18);
+			model.addAttribute("ageMax", 65);
+			/*ここまでJavaScript用*/
+			
 			return "employeeList";
 		}
 	}
@@ -53,7 +60,10 @@ public class EmployeeList {
 			model.addAttribute("nameCheck", true);
 		}
 		
-		//年齢上限が未指定の場合
+		//年齢が未指定の場合
+		if(refineAgeMin == 0) {
+			refineAgeMin = 18;
+		}
 		if(refineAgeMax == 0) {
 			refineAgeMax = 65;
 		}
@@ -85,6 +95,22 @@ public class EmployeeList {
 			if(isAdmin == true) {
 				//管理人である
 			}
+			
+			/*ここからJavaScript用*/
+			//未指定の場合
+			if(refineDepartment.equals("")) {
+				refineDepartment = "未選択";
+			}
+			if(refinePosition.equals("")) {
+				refinePosition = "未選択";
+			}
+			//絞り込み時の選択肢記録用
+			model.addAttribute("name", refineName);
+			model.addAttribute("ageMin", refineAgeMin);
+			model.addAttribute("ageMax", refineAgeMax);
+			model.addAttribute("department", refineDepartment);
+			model.addAttribute("position", refinePosition);
+			/*ここまでJavaScript用*/
 		//入力ミスがあった場合
 		}else {
 			employeeListOpen(model);

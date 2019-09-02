@@ -12,7 +12,7 @@
 				<form th:action="@{/employeeCreate}" th:object="${employeeCreateData}" method="post">
 					<div class="row">
 						<div th:if="${nameCheck == true}" class="col-12 mt-4">
-							<div th:replace="replace::entryErr(名前を入力してください。')"></div>
+							<div th:replace="replace::entryErr('名前を入力してください。')"></div>
 						</div>
 						<div class="col-md-2 col-xs-12 text-left my-1">名前</div>
 						<div class="col-md-10 col-xs-12 text-right my-1">

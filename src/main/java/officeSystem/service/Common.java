@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import officeSystem.controller.Index;
-import officeSystem.controller.Login;
+import officeSystem.controller.other.Index;
+import officeSystem.controller.other.Login;
 import officeSystem.repository.EmployeeRepository;
 
 @Service

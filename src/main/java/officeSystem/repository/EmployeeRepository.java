@@ -35,6 +35,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 			nativeQuery = true)
 	public List<Employee> employeeRefine(String name, int age_min, int age_max, String department, String position);
 	
+	//出退勤社員絞り込み
+	@Query(value = "SELECT * FROM employee WHERE department = :department", nativeQuery = true)
+	public List<Employee> workTimeRefine(String department);
+	
 	//出退勤状態変更
 	@Modifying
 	@Query(value = "UPDATE employee SET working = :working WHERE name = :name", nativeQuery = true)

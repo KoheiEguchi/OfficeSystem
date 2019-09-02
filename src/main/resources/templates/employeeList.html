@@ -18,16 +18,16 @@
 						</div>
 						<div class="col-3 text-left my-1">名前(全角カナ)</div>
 						<div class="col-9 text-right my-1">
-							<input type="text" name="refineName" placeholder="絞り込む名前">
+							<input type="text" id="name" name="refineName" placeholder="絞り込む名前">
 						</div>
 						<div th:if="${ageCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('年齢の範囲を正しく入力してください。')"></div>
 						</div>
 						<div class="col-6 text-left my-1">年齢(半角数字)</div>
 						<div class="col-6 text-right my-1">
-							<select name="refineAgeMin"><option th:replace="replace::selectAge"></select>
+							<select id="ageMin" name="refineAgeMin"><option th:replace="replace::selectAge"></select>
 							<span class="mx-4">〜</span>
-							<select name="refineAgeMax"><option th:replace="replace::selectAge"></select>
+							<select id="ageMax" name="refineAgeMax"><option th:replace="replace::selectAge"></select>
 						</div>
 						<div class="col-6 text-left my-1">所属部署</div>
 						<div class="col-6 text-right my-1"><span th:replace="replace::selectDepartment"></span></div>
@@ -70,5 +70,28 @@
 			<div class="col-12"><a th:href="@{/index}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a></div>
 		</div>
 	</div>
+	<script th:inline="javascript">
+		var name = /*[[${name}]]*/;
+		var ageMin = /*[[${ageMin}]]*/;
+		var ageMax = /*[[${ageMax}]]*/;
+		var department = /*[[${department}]]*/;
+		var position = /*[[${position}]]*/;
+		
+		if(name != null){
+			document.getElementById("name").value = name;
+		}
+		if(ageMin != null){
+			document.getElementById("ageMin").value = ageMin;
+		}
+		if(ageMax != null){
+			document.getElementById("ageMax").value = ageMax;
+		}
+		if(department != null){
+			document.getElementById("department").value = department;
+		}
+		if(position != null){
+			document.getElementById("position").value = position;
+		}
+	</script>
 </body>
 </html>

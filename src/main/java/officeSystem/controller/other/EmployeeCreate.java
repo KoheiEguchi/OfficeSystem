@@ -1,4 +1,4 @@
-package officeSystem.controller;
+package officeSystem.controller.other;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,14 +46,14 @@ public class EmployeeCreate {
 		
 		String department = employeeCreateData.getDepartment();
 		//所属部署が未選択の場合
-		if(department == "未選択") {
+		if(department.equals("未選択")) {
 			formCheck = false;
 			model.addAttribute("departmentCheck", true);
 		}
 		
 		String position = employeeCreateData.getPosition();
 		//役職が未選択の場合
-		if(position == "未選択") {
+		if(position.equals("未選択")) {
 			formCheck = false;
 			model.addAttribute("positionCheck", true);
 		}

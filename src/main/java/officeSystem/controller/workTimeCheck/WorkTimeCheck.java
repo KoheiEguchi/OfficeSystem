@@ -1,4 +1,4 @@
-package officeSystem.controller;
+package officeSystem.controller.workTimeCheck;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import officeSystem.model.Employee;
 import officeSystem.model.WorkTime;
@@ -30,7 +31,7 @@ public class WorkTimeCheck {
 	
 	//出退勤管理、指定日の出退勤情報ページを表示
 	@GetMapping("/workTimeCheck")
-	public String workTimeCheckOpen(String strDate, Model model) throws ParseException {
+	public String workTimeCheckOpen(String department, String strDate, Model model) throws ParseException {
 		//ログイン確認
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
@@ -38,9 +39,12 @@ public class WorkTimeCheck {
 			return "login";
 		//ログインしている場合
 		}else {
-			//社員一覧を取得
-			List<Employee> employeeList = employeeRep.allEmployee();
-			model.addAttribute("employeeList", employeeList);
+			//社員絞り込みされていない場合
+			if(department == null) {
+				//社員一覧を取得
+				List<Employee> employeeList = employeeRep.allEmployee();
+				model.addAttribute("employeeList", employeeList);
+			}
 			
 			//ログイン者が管理人か確認
 			boolean isAdmin = common.isAdmin(model);
@@ -68,8 +72,31 @@ public class WorkTimeCheck {
 			String viewerName = common.getViewerName();
 			model.addAttribute("viewerName", viewerName);
 			
+			/*ここからJavaScript用*/
+			//絞り込み時の選択肢記録用
+			model.addAttribute("department", department);
+			/*ここまでJavaScript用*/
+			
 			return "workTimeCheck";
 		}
+	}
+	
+	//出退勤社員の絞り込み
+	@PostMapping("/workTimeRefine")
+	public String workTimeRefine(@RequestParam("department")String department, Model model) throws ParseException {
+		//部署が選択されていない場合
+		if(department.equals("未選択")) {
+			department = null;
+		//選択されている場合
+		}else {
+			List<Employee> employeeList = employeeRep.workTimeRefine(department);
+			model.addAttribute("employeeList", employeeList);
+		}
+		
+		//再表示用
+		String strDate = null;
+		workTimeCheckOpen(department, strDate, model);
+		return "workTimeCheck";
 	}
 	
 	//出退勤時刻を記録
@@ -96,8 +123,10 @@ public class WorkTimeCheck {
 		//出退勤状態を変更
 		employeeRep.changeWorking(working, name);
 		
+		//再表示用
+		String department = null;
 		String strDate = null;
-		workTimeCheckOpen(strDate, model);
+		workTimeCheckOpen(department, strDate, model);
 		return "workTimeCheck";
 	}
 }

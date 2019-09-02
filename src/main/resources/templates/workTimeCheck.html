@@ -15,6 +15,12 @@
 			</div>
 			<div class="col-1"></div>
 			<div class="col-10">
+				<form th:action="@{/workTimeRefine}" method="post">
+					<div class="col-12">
+						<div th:replace="replace::selectDepartment"></div>
+						<input class="btn btn-primary shadow ml-2 my-4" type="submit" value="絞り込む">
+					</div>
+				</form>
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
@@ -49,7 +55,7 @@
 						<div class="col-12 my-4">
 							<form th:action="@{/workTimeCheck}" method="get">
 								確認したい日付を選択してください：
-								<input type="date" name="strDate"><input class="btn btn-primary shadow" type="submit" value="選択">
+								<input type="date" name="strDate"><input class="btn btn-primary shadow ml-2" type="submit" value="選択">
 							</form>
 						</div>
 						<div class="col-12 h4" th:inline="text">[[${#calendars.format(workDate, 'yyyy年M月d日')}]]の出退勤状態</div>
@@ -76,5 +82,11 @@
 			<div class="col-12 my-4"><a th:href="@{/index}"><input class="btn btn-secondary shadow" type="button" value="戻る"></a></div>
 		</div>
 	</div>
+	<script th:inline="javascript">
+		var department = /*[[${department}]]*/;
+		if(department != null){
+			document.getElementById("department").value = department;
+		}		
+	</script>
 </body>
 </html>
