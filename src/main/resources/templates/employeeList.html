@@ -2,42 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="replace::head('社員一覧')"></head>
 <body>
+	<div th:replace="replace::header"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
 				<div class="h1 mt-5">社員一覧</div>
 				<div th:replace="replace::msg"></div>
 			</div>
-			<div class="col-3"></div>
-			<div class="col-6">
+			<div class="col-md-3 col-xs-1"></div>
+			<div class="col-md-6 col-xs-10">
 				<form th:action="@{/employeeListRefine}" method="post">
 					<div class="row">
 						<div class="col-12 h3">絞り込み</div>
 						<div th:if="${nameCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('名前を全角カナで入力してください。')"></div>
 						</div>
-						<div class="col-3 text-left my-1">名前(全角カナ)</div>
-						<div class="col-9 text-right my-1">
+						<div class="col-md-3 col-xs-12 text-left my-1">名前(全角カナ)</div>
+						<div class="col-md-9 col-xs-12 text-right my-1">
 							<input type="text" id="name" name="refineName" placeholder="絞り込む名前">
 						</div>
 						<div th:if="${ageCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('年齢の範囲を正しく入力してください。')"></div>
 						</div>
-						<div class="col-6 text-left my-1">年齢(半角数字)</div>
-						<div class="col-6 text-right my-1">
+						<div class="col-md-6 col-xs-12 text-left my-1">年齢(半角数字)</div>
+						<div class="col-md-6 col-xs-12 text-right my-1">
 							<select id="ageMin" name="refineAgeMin"><option th:replace="replace::selectAge"></select>
 							<span class="mx-4">〜</span>
 							<select id="ageMax" name="refineAgeMax"><option th:replace="replace::selectAge"></select>
 						</div>
-						<div class="col-6 text-left my-1">所属部署</div>
-						<div class="col-6 text-right my-1"><span th:replace="replace::selectDepartment"></span></div>
-						<div class="col-6 text-left my-1">役職</div>
-						<div class="col-6 text-right my-1"><span th:replace="replace::selectPosition"></span></div>
+						<div class="col-md-6 col-xs-12 text-left my-1">所属部署</div>
+						<div class="col-md-6 col-xs-12 text-right my-1"><span th:replace="replace::selectDepartment"></span></div>
+						<div class="col-md-6 col-xs-12 text-left my-1">役職</div>
+						<div class="col-md-6 col-xs-12 text-right my-1"><span th:replace="replace::selectPosition"></span></div>
 						<div class="col-12 my-4"><input class="btn btn-primary shadow" type="submit" value="絞り込む"></div>
 					</div>
 				</form>
 			</div>
-			<div class="col-3"></div>
+			<div class="col-md-3 col-xs-1"></div>
 			<div class="col-1"></div>
 			<div class="col-10">
 				<table class="table table-bordered table-hover">
@@ -71,11 +72,11 @@
 		</div>
 	</div>
 	<script th:inline="javascript">
-		var name = /*[[${name}]]*/;
-		var ageMin = /*[[${ageMin}]]*/;
-		var ageMax = /*[[${ageMax}]]*/;
-		var department = /*[[${department}]]*/;
-		var position = /*[[${position}]]*/;
+		var name = [[${name}]];
+		var ageMin = [[${ageMin}]];
+		var ageMax = [[${ageMax}]];
+		var department = [[${department}]];
+		var position = [[${position}]];
 		
 		if(name != null){
 			document.getElementById("name").value = name;

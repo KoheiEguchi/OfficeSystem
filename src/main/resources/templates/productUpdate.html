@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="replace::head('商品情報更新')"></head>
 <body>
+	<div th:replace="replace::header"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -16,13 +17,15 @@
 							<div th:if="${nameCheck == true}" class="col-12 mt-4">
 								<div th:replace="replace::entryErr('商品名を入力してください。')"></div>
 							</div>
-							<div class="col-2 text-left my-1">商品名</div>
-							<div class="col-10 text-right my-1"><input type="text" name="name" size="60" th:value=*{name} placeholder="商品名"></div>
+							<div class="col-md-2 col-xs-12 text-left my-1">商品名</div>
+							<div class="col-md-10 col-xs-12 text-right my-1">
+								<input class="longText" type="text" name="name" size="60" th:value=*{name} placeholder="商品名">
+							</div>
 							<div th:if="${placeCheck == true}" class="col-12 mt-4">
 								<div th:replace="replace::entryErr('管理場所を選択してください。')"></div>
 							</div>
-							<div class="col-6 text-left my-1">管理場所</div>
-							<div class="col-6 text-right my-1">
+							<div class="col-md-6 col-xs-12 text-left my-1">管理場所</div>
+							<div class="col-md-6 col-xs-12 text-right my-1">
 								<select name="place">
 									<option value="未選択">未選択</option>
 									<option value="A1">A1</option>

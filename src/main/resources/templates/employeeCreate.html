@@ -42,6 +42,9 @@
 						<div th:if="${loginIdCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('ログインIDを入力してください。')"></div>
 						</div>
+						<div th:if="${loginIdSameCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('そのログインIDはすでに使われています。')"></div>
+						</div>
 						<div class="col-md-6 col-xs-12 text-left my-1">ログインID</div>
 						<div class="col-md-6 col-xs-12 text-right my-1"><input type="text" name="loginId" placeholder="ログインID"></div>
 						<div th:if="${passNullCheck == true}" class="col-12 mt-4">

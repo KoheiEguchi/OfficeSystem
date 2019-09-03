@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="replace::head('社員詳細')"></head>
 <body>
+	<div th:replace="replace::header"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -11,20 +12,20 @@
 			<div class="col-1"></div>
 			<div class="col-10">
 				<div class="row">
-					<div class="col-3"></div>
-					<div class="col-6">
+					<div class="col-md-3 col-xs-1"></div>
+					<div class="col-md-6 col-xs-10">
 						<div th:inline="text" th:each="employee: ${employeeData}" th:object="${employee}">
 							<div class="row">
-								<div class="col-6 text-left my-1 border-bottom">名前</div>
-								<div class="col-6 text-right my-1 border-bottom">[[*{name}]]</div>
-								<div class="col-6 text-left my-1 border-bottom">読み</div>
-								<div class="col-6 text-right my-1 border-bottom">[[*{nameRuby}]]</div>
-								<div class="col-6 text-left my-1 border-bottom">年齢</div>
-								<div class="col-6 text-right my-1 border-bottom">[[*{age}]]</div>
-								<div class="col-6 text-left my-1 border-bottom">所属部署</div>
-								<div class="col-6 text-right my-1 border-bottom">[[*{department}]]</div>
-								<div class="col-6 text-left my-1 border-bottom">役職</div>
-								<div class="col-6 text-right my-1 border-bottom">[[*{position}]]</div>
+								<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">名前</div>
+								<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{name}]]</div>
+								<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">読み</div>
+								<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{nameRuby}]]</div>
+								<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">年齢</div>
+								<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{age}]]</div>
+								<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">所属部署</div>
+								<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{department}]]</div>
+								<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">役職</div>
+								<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{position}]]</div>
 								<div class="col-12">
 									<div th:if="${isAdmin == true}">
 										<a th:href="@{/employeeUpdate(employeeId=*{id})}">
@@ -40,7 +41,7 @@
 							<div class="h4 mt-4">[[*{name}]]さんの出退勤情報</div>
 						</div>
 					</div>
-					<div class="col-3"></div>
+					<div class="col-md-3 col-xs-1"></div>
 				</div>
 				<table class="table table-bordered table-hover">
 					<thead>

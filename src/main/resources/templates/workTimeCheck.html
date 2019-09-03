@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="replace::head('出退勤管理')"></head>
 <body>
+	<div th:replace="replace::header"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -83,7 +84,7 @@
 		</div>
 	</div>
 	<script th:inline="javascript">
-		var department = /*[[${department}]]*/;
+		var department = [[${department}]];
 		if(department != null){
 			document.getElementById("department").value = department;
 		}		

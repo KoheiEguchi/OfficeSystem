@@ -2,28 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="replace::head('社員削除')"></head>
 <body>
+	<div th:replace="replace::header"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
 				<div class="h1 mt-5">社員削除</div>
 				<div class="mt-4">こちらの社員を一覧から削除しますか？</div>
 			</div>
-			<div class="col-3"></div>
-			<div class="col-6">
+			<div class="col-md-3 col-xs-1"></div>
+			<div class="col-md-6 col-xs-10">
 				<div th:inline="text" th:each="employee: ${employeeData}" th:object="${employee}">
 					<div class="row">
-						<div class="col-6 text-left my-1">氏名</div>
-						<div class="col-6 text-right my-1">[[*{name}]]</div>
-						<div class="col-6 text-left my-1">読み</div>
-						<div class="col-6 text-right my-1">[[*{nameRuby}]]</div>
-						<div class="col-6 text-left my-1">年齢</div>
-						<div class="col-6 text-right my-1">[[*{age}]]歳</div>
-						<div class="col-6 text-left my-1">所属部署</div>
-						<div class="col-6 text-right my-1">[[*{department}]]</div>
-						<div class="col-6 text-left my-1">役職</div>
-						<div class="col-6 text-right my-1">[[*{position}]]</div>
-						<div class="col-6 text-left my-1">入社日時</div>
-						<div class="col-6 text-right my-1">[[*{#calendars.format(joinDate, 'yyyy年M月d日 k時m分s秒')}]]</div>
+						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">氏名</div>
+						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{name}]]</div>
+						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">読み</div>
+						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{nameRuby}]]</div>
+						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">年齢</div>
+						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{age}]]歳</div>
+						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">所属部署</div>
+						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{department}]]</div>
+						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">役職</div>
+						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{position}]]</div>
+						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">入社日時</div>
+						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{#calendars.format(joinDate, 'yyyy年M月d日 k時m分s秒')}]]</div>
 						<div class="col-12">
 							<form th:action="@{/employeeDelete}" method="post">
 								<input type="hidden" name="employeeId" th:value="*{id}">
@@ -34,7 +35,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-3"></div>
+			<div class="col-md-3 col-xs-1"></div>
 		</div>
 	</div>
 </body>

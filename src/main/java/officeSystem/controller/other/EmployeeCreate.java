@@ -63,6 +63,14 @@ public class EmployeeCreate {
 		if(loginId.equals("")) {
 			formCheck = false;
 			model.addAttribute("loginIdCheck", true);
+		//ログインIDが書かれている場合
+		}else {
+			int loginIdSameCheck = employeeRep.loginIdSameCheck(loginId);
+			//ログインIDが使用済みの場合
+			if(loginIdSameCheck != 0) {
+				formCheck = false;
+				model.addAttribute("loginIdSameCheck", true);
+			}
 		}
 		
 		//パスワードが空欄の場合

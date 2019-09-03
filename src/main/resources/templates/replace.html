@@ -15,6 +15,23 @@
 	<title th:text="${title} + ' | 業務システム'"></title>
 </head>
 <body>
+	<!--/* ヘッダー */-->
+	<header th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-secondary">
+			<a class="navbar-brand text-light" th:href="@{/index}">業務システム</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarList">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarList">
+				<ul class="navbar-nav">
+					<li class="nav-item px-3"><a class="nav-link text-light" th:href="@{/workTimeCheck}">出退勤管理</a></li>
+					<li class="nav-item px-3"><a class="nav-link text-light" th:href="@{/productList}">商品管理</a></li>
+					<li class="nav-item px-3"><a class="nav-link text-light" th:href="@{/employeeList}">社員一覧</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	
 	<!--/* メッセージ */-->
 	<div th:fragment="msg">
 		<div th:if="${msg}">

@@ -7,6 +7,13 @@ html {
 body {
 	width: 100%;
     height: 100%;
+    /* ヘッダー用 */
+	padding-top: 50px;
+}
+
+/* 小画面時ヘッダーのボタン周りから青枠消す */
+.navbar-toggler:focus {
+	outline: none;
 }
 
 /* 文を原則中央配置にする */
@@ -17,4 +24,39 @@ div, p {
 /* メッセージの✖クリック時に周りの青枠消す */
 .close:active {
 	outline: none;
+}
+
+/* 長い入力欄をはみ出させないようにする */
+.longText {
+	max-width: 100%;
+}
+
+/* 小画面でのテーブル表示 */
+@media only screen and (max-width: 480px) {
+	table {
+		display: block; 
+    	width: 100%;
+	}
+	thead {
+		display: block;
+		float: left;
+		overflow-x: scroll;
+	}
+	tbody { 
+	    display: block; 
+	    width: auto; 
+	    overflow-x: auto; 
+	    white-space: nowrap;
+  	}
+  	th { 
+	    display: block;
+	    width: auto;
+	}
+	tbody tr { 
+	    display: inline-block; 
+	    margin: 0 -3px;
+	}
+	td { 
+	    display: block;
+	}
 }

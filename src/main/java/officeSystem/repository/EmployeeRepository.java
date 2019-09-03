@@ -44,6 +44,10 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	@Query(value = "UPDATE employee SET working = :working WHERE name = :name", nativeQuery = true)
 	public void changeWorking(int working, String name);
 	
+	//ログインID被り確認
+	@Query(value = "SELECT id FROM employee WHERE login_id = :login_id", nativeQuery = true)
+	public int loginIdSameCheck(String login_id);
+	
 	//社員登録
 	@Modifying
 	@Query(value = 
