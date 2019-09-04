@@ -9,13 +9,16 @@
 				<div class="h1 mt-5">目次</div>
 				<div th:replace="replace::msg"></div>
 			</div>
-			<div class="col-md-4 col-xs-12 bg-info indexLinkArea">
+			<div class="col-md-6 col-xs-12 bg-info shadow indexLinkArea">
 				<a class="indexLink indexWorkTime" th:href="@{/workTimeCheck}"><span class="h1 text-light indexLinkContent">出退勤管理</span></a>
 			</div>
-			<div class="col-md-4 col-xs-12 bg-success indexLinkArea">
+			<div class="col-md-6 col-xs-12 bg-danger shadow indexLinkArea">
+				<a class="indexLink indexMessage" th:href="@{/message}"><span class="h1 text-light indexLinkContent">連絡事項</span></a>
+			</div>
+			<div class="col-md-6 col-xs-12 bg-success shadow indexLinkArea">
 				<a class="indexLink indexProduct" th:href="@{/productList}"><span class="h1 text-light indexLinkContent">商品管理</span></a>
 			</div>
-			<div class="col-md-4 col-xs-12 bg-warning indexLinkArea">
+			<div class="col-md-6 col-xs-12 bg-warning shadow indexLinkArea">
 				<a class="indexLink indexEmployee" th:href="@{/employeeList}"><span class="h1 text-dark indexLinkContent">社員一覧</span></a>
 			</div>
 			<div class="col-12 my-5">

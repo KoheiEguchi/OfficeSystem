@@ -16,15 +16,8 @@
 					<div class="col-md-6 col-xs-10">
 						<form th:action="@{/employeeUpdate}" th:object="${employeeUpdateData}" method="post">
 							<div th:inline="text" th:each="employee: ${employeeData}" th:object="${employee}">
+								<div th:replace="replace::loginForm"></div>
 								<div class="row">
-									<div class="col-md-6 col-xs-12 text-left">現在のログインID</div>
-									<div class="col-md-6 col-xs-12 text-right">
-										<input type="text" name="loginId" placeholder="ログインID" autofocus>
-									</div>
-									<div class="col-md-6 col-xs-12 text-left my-1">現在のパスワード</div>
-									<div class="col-md-6 col-xs-12 text-right mt-1 mb-4">
-										<input type="password" name="password" placeholder="パスワード">
-									</div>
 									<div th:if="${nameCheck == true}" class="col-12 mt-4">
 										<div th:replace="replace::entryErr('名前を入力してください。')"></div>
 									</div>

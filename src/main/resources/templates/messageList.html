@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="replace::head('連絡事項')"></head>
+<body>
+	<div th:replace="replace::header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="h1 mt-5">連絡事項</div>
+				<div th:replace="replace::msg"></div>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-10">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>連絡日時</th><th>連絡者</th><th>内容</th><th>確認</th><th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:inline="text" th:each="message: ${messageList}" th:object="${message}">
+							<td>[[*{contactDate}]]</td>
+							<td>[[*{contactName}]]</td>
+							<td>[[*{message}]]</td>
+							<td>[[*{confirm}]]</td>
+							<td>
+								<a th:href="@{/messageDetail(messageId=*{id})}">
+									<input class="btn btn-success btn-sm shadow w-100" type="button" value="詳細">
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div th:if="${noMessage == true}">
+					<div class="h5">現在連絡事項はありません。</div>
+				</div>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-12"><a th:href="@{/index}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a></div>
+		</div>
+	</div>
+</body>
+</html>

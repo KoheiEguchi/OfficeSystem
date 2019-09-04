@@ -26,13 +26,20 @@ div, p {
 	outline: none;
 }
 
+/* 小画面でテーブル以外の情報表示を中央揃えにする */
+@media screen and (max-width: 640px) {
+	.text-left, .text-right {
+		text-align: center !important;
+	}
+}
+
 /* 長い入力欄をはみ出させないようにする */
 .longText {
 	max-width: 100%;
 }
 
 /* 小画面でのテーブル表示 */
-@media only screen and (max-width: 480px) {
+@media screen and (max-width: 640px) {
 	table {
 		display: block; 
     	width: 100%;

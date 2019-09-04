@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* 背景とリンクの範囲を一致させる */
-.indexColumn .col-md-4 {
+.indexColumn .col-md-6 {
 	padding: 0;
 }
 
@@ -9,10 +9,19 @@
 .indexLinkArea {
 	height: 300px;
 }
+@media screen and (max-width: 640px){
+	.indexLinkArea {
+		height: 200px;
+	}
+}
 
 /* 出退勤管理の背景色変化 */
 .indexWorkTime:hover {
 	background-color: #87cefa;
+}
+/* 連絡事項の背景色変化 */
+.indexMessage:hover {
+	background-color: #fa8072;
 }
 /* 商品在庫一覧の背景色変化 */
 .indexProduct:hover {
@@ -27,7 +36,14 @@
 .indexLink {
 	display: block;
 	height: 300px;
-	transition: all  0.3s ease;
+	transition: all 0.3s ease;
+}
+@media screen and (max-width: 640px){
+	.indexLink {
+		display: block;
+		height: 200px;
+		transition: all 0.3s ease;
+	}
 }
 /* ホバーでの下線消す */
 .indexLink:hover {
@@ -37,4 +53,9 @@
 /* リンク文の位置調整 */
 .indexLinkContent {
 	vertical-align: -140px;
+}
+@media screen and (max-width: 640px){
+	.indexLinkContent {
+		vertical-align: -95px;
+	}
 }
