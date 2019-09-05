@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="replace::head('連絡投稿')"></head>
+<body>
+	<div th:replace="replace::header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="h1 mt-5">連絡投稿</div>
+				<div th:replace="replace::msg"></div>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-10">
+				<form th:action="@{/messagePost}" method="post">
+					<div class="row">
+						<div th:if="${nameCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('名前を入力してください。')"></div>
+						</div>
+						<div class="col-md-6 col-xs-12 text-left my-1">連絡者</div>
+						<div class="col-md-6 col-xs-12 text-right my-1">
+							<input type="text" name="name" th:value="${viewerName}" placeholder="連絡者" autofocus>
+						</div>
+						<div th:if="${messageCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('連絡内容を入力してください。')"></div>
+						</div>
+						<div class="col-md-2 col-xs-12 text-left my-1">内容</div>
+						<div class="col-md-10 col-xs-12 text-right my-1">
+							<textarea name="message" cols="80" rows="10" placeholder="連絡内容"></textarea>
+						</div>
+						<div class="col-12"><input class="btn btn-primary shadow my-4" type="submit" value="投稿"></div>
+					</div>
+				</form>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-12"><a th:href="@{/messageList}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a></div>
+		</div>
+	</div>
+</body>
+</html>

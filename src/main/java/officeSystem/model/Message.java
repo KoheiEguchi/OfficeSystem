@@ -37,6 +37,6 @@ public class Message {
 	
 	//確認チェック
 	@Column(name = "confirm", nullable = false)
-	private int confirm;
+	private String confirm;
 	
 }

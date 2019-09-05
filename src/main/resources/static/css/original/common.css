@@ -33,6 +33,14 @@ div, p {
 	}
 }
 
+/* 一行で説明を省略する */
+.textShort {
+	overflow: hidden;
+	width: 400px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 /* 長い入力欄をはみ出させないようにする */
 .longText {
 	max-width: 100%;

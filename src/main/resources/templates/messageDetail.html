@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="replace::head('連絡詳細')"></head>
+<body>
+	<div th:replace="replace::header"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="h1 mt-5">連絡事項</div>
+				<div th:replace="replace::msg"></div>
+			</div>
+			<div class="col-1"></div>
+			<div class="col-10">
+				<div th:inline="text" th:each="message: ${messageData}" th:object="${message}">
+					<div class="row">
+						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">連絡日時</div>
+						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{#calendars.format(contactDate, 'yyyy年M月d日 k時m分s秒')}]]</div>
+						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">連絡者</div>
+						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{contactName}]]</div>
+						<div class="col-12 text-left mt-1">内容</div>
+						<div class="col-12 text-center mb-1 border-bottom">[[*{message}]]</div>
+						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">確認</div>
+						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{confirm}]]</div>
+						<div class="col-12" th:if="*{confirm == '未確認'}">
+							<form th:action="@{/messageDetail}" method="post">
+								<input type="hidden" name="messageId" th:value=*{id}>
+								<input class="btn btn-success shadow my-4" type="submit" value="確認完了">
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-1"></div>
+				<div class="col-12"><a th:href="@{/messageList}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

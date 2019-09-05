@@ -8,6 +8,18 @@
 			<div class="col-12">
 				<div class="h1 mt-5">連絡事項</div>
 				<div th:replace="replace::msg"></div>
+				<br>
+				<a th:href="@{/messagePost}"><input class="btn btn-success shadow my-4" type="button" value="連絡事項を投稿する"></a>
+				<div th:if="${noConfirm != true}">
+					<form th:action="messageList" method="post">
+						<input class="btn btn-warning shadow my-2" type="submit" value="未確認のものだけ表示">
+					</form>
+				</div>
+				<div th:if="${noConfirm == true}">
+					<form th:action="messageList" method="get">
+						<input class="btn btn-warning shadow my-2" type="submit" value="全て表示">
+					</form>
+				</div>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-10">
@@ -19,9 +31,18 @@
 					</thead>
 					<tbody>
 						<tr th:inline="text" th:each="message: ${messageList}" th:object="${message}">
-							<td>[[*{contactDate}]]</td>
+							<td>[[*{#calendars.format(contactDate, 'yyyy年M月d日 k時m分s秒')}]]</td>
 							<td>[[*{contactName}]]</td>
-							<td>[[*{message}]]</td>
+							<td>
+								<th:block th:if=*{message}>
+									<th:block th:each="oneLineMessage, messageZone : *{message.split('\r\n|\r|\n', -1)}">
+										<div th:if="${messageZone.first}">
+											<div class="textShort"><th:block>[[${oneLineMessage}]]</th:block></div>
+										</div>
+										<div th:if="${!messageZone.first}" class="d-none"></div>
+									</th:block>
+								</th:block>
+							</td>
 							<td>[[*{confirm}]]</td>
 							<td>
 								<a th:href="@{/messageDetail(messageId=*{id})}">
