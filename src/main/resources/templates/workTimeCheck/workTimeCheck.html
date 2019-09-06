@@ -6,7 +6,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<div class="h1 mt-5">出退勤管理</div>
+				<div th:replace="replace::pageTitle('出退勤管理')"></div>
 			</div>
 			<div th:if="${beginWorking == true}" class="col-12 mt-4">
 				<div th:replace="replace::entryErr('おはようございます。')"></div>
@@ -80,7 +80,7 @@
 				</div>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-12 my-4"><a th:href="@{/index}"><input class="btn btn-secondary shadow" type="button" value="戻る"></a></div>
+			<div class="col-12 my-4"><a th:href="@{/index}"><input class="btn btn-secondary shadow my-5" type="button" value="戻る"></a></div>
 		</div>
 	</div>
 	<script th:inline="javascript">

@@ -26,13 +26,13 @@ public class MessagePost {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			String viewerName = common.getViewerName();
 			model.addAttribute("viewerName", viewerName);
 			
-			return "messagePost";
+			return "messageList/messagePost";
 		}
 	}
 	
@@ -59,11 +59,11 @@ public class MessagePost {
 			model.addAttribute("msg", "連絡事項を投稿しました。");
 			
 			messageList.messageListOpen(model);
-			return "messageList";
+			return "messageList/messageList";
 		//正しくない入力があった場合
 		}else {
 			messagePostOpen(model);
-			return "messagePost";
+			return "messageList/messagePost";
 		}
 	}
 }

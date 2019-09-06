@@ -32,7 +32,7 @@ public class ProductDetail {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			//ログイン者が管理人か確認
@@ -49,7 +49,7 @@ public class ProductDetail {
 			List<Transport> productTransport = transportRep.getProductTransport(productId);
 			model.addAttribute("productTransport", productTransport);
 			
-			return "productDetail";
+			return "productList/productDetail";
 		}
 	}
 	
@@ -101,6 +101,6 @@ public class ProductDetail {
 			model.addAttribute("msg", "個数を変更しました。");
 		}
 		productDetailOpen(productId, model);
-		return "productDetail";
+		return "productList/productDetail";
 	}
 }

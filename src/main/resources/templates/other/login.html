@@ -5,8 +5,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<div class="h1 mt-5">ログイン</div>
-				<div th:replace="replace::msg"></div>
+				<div th:replace="replace::pageTitle('ログイン')"></div>
 			</div>
 			<div class="col-md-4 col-xs-1"></div>
 			<div class="col-md-4 col-xs-10">
@@ -14,7 +13,7 @@
 					<div th:replace="replace::loginForm"></div>
 					<input class="btn btn-primary shadow my-4" type="submit" value="ログイン">
 				</form>
-				<a th:href="@{/employeeCreate}"><input class="btn btn-success shadow" type="button" value="新規登録"></a>
+				<a th:href="@{/employeeCreate}"><input class="btn btn-success shadow my-5" type="button" value="新規登録"></a>
 			</div>
 			<div class="col-md-4 col-xs-1"></div>
 		</div>

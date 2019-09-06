@@ -29,21 +29,21 @@ public class ProductDelete {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			//管理人専用ページを開いて良いか確認
 			boolean admin = common.isOpenAdminPage(model);
 			//管理人でない場合
 			if(admin == false) {
-				return "index";
+				return "other/index";
 			//管理人の場合
 			}else {
 				//商品詳細取得
 				List<Product> productDetail = productRep.getProductDetail(productId);
 				model.addAttribute("productDetail", productDetail);
 				
-				return "productDelete";
+				return "productList/productDelete";
 			}
 		}
 	}
@@ -55,6 +55,6 @@ public class ProductDelete {
 		model.addAttribute("msg", "商品を削除しました。");
 		
 		productList.productListOpen(model);
-		return "productList";
+		return "productList/productList";
 	}
 }

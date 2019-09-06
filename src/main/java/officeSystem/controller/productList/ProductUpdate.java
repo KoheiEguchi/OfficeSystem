@@ -29,21 +29,21 @@ public class ProductUpdate {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			//管理人専用ページを開いて良いか確認
 			boolean admin = common.isOpenAdminPage(model);
 			//管理人でない場合
 			if(admin == false) {
-				return "index";
+				return "other/index";
 			//管理人の場合
 			}else {
 				//商品詳細取得
 				List<Product> productDetail = productRep.getProductDetail(productId);
 				model.addAttribute("productDetail", productDetail);
 				
-				return "productUpdate";
+				return "productList/productUpdate";
 			}
 		}
 	}
@@ -73,11 +73,11 @@ public class ProductUpdate {
 			model.addAttribute("msg", "商品情報を更新しました。");
 			
 			productDetail.productDetailOpen(productId, model);
-			return "productDetail";
+			return "productList/productDetail";
 		//正しく入力されていない場合
 		}else {
 			productUpdateOpen(productId, model);
-			return "productUpdate";
+			return "productList/productUpdate";
 		}
 	}
 }

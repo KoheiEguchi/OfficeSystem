@@ -36,7 +36,7 @@ public class WorkTimeCheck {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			//社員絞り込みされていない場合
@@ -77,7 +77,7 @@ public class WorkTimeCheck {
 			model.addAttribute("department", department);
 			/*ここまでJavaScript用*/
 			
-			return "workTimeCheck";
+			return "workTimeCheck/workTimeCheck";
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class WorkTimeCheck {
 		//再表示用
 		String strDate = null;
 		workTimeCheckOpen(department, strDate, model);
-		return "workTimeCheck";
+		return "workTimeCheck/workTimeCheck";
 	}
 	
 	//出退勤時刻を記録
@@ -127,6 +127,6 @@ public class WorkTimeCheck {
 		String department = null;
 		String strDate = null;
 		workTimeCheckOpen(department, strDate, model);
-		return "workTimeCheck";
+		return "workTimeCheck/workTimeCheck";
 	}
 }

@@ -19,10 +19,10 @@ public class Index {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
-			return "index";		
+			return "other/index";		
 		}
 		
 	}

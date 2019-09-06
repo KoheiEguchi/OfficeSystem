@@ -24,7 +24,7 @@ public class Login {
 	//ログイン画面を表示
 	@GetMapping({"/", "/login"})
 	public String loginOpen() {
-		return "login";
+		return "other/login";
 	}
 	
 	//ログイン処理
@@ -36,7 +36,7 @@ public class Login {
 		//ログインIDかパスワードが違う場合
 		if(loginCheck == null) {
 			model.addAttribute("msg", "ログインできません。");
-			return "login";
+			return "other/login";
 		//ログインできた場合
 		}else {
 			int viewerId = ((Integer) loginCheck).intValue();
@@ -47,7 +47,7 @@ public class Login {
 			session.setAttribute("viewerName", viewerName);
 			
 			index.indexOpen(model);
-			return "index";
+			return "other/index";
 		}
 	}
 	
@@ -57,6 +57,6 @@ public class Login {
 		//セッション削除
 		session.invalidate();
 		model.addAttribute("msg", "ログアウトしました。");
-		return "login";
+		return "other/login";
 	}
 }

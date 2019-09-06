@@ -19,7 +19,7 @@ public class EmployeeCreate {
 	//社員登録画面を表示
 	@GetMapping("/employeeCreate")
 	public String employeeCreateOpen() {
-		return "employeeCreate";
+		return "other/employeeCreate";
 	}
 	
 	//社員を登録
@@ -89,10 +89,10 @@ public class EmployeeCreate {
 			employeeRep.employeeCreate(name, nameRuby, age, department, position, loginId, password);
 			model.addAttribute("msg", "社員を登録しました。");
 			
-			return "login";
+			return "other/login";
 		//正しくない入力があった場合
 		}else {
-			return "employeeCreate";
+			return "other/employeeCreate";
 		}
 	}
 }

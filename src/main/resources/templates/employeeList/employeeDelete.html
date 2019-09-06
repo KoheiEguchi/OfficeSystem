@@ -6,7 +6,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<div class="h1 mt-5">社員削除</div>
+				<div th:replace="replace::pageTitle('社員削除')"></div>
 				<div class="mt-4">こちらの社員を一覧から削除しますか？</div>
 			</div>
 			<div class="col-md-3 col-xs-1"></div>
@@ -30,7 +30,7 @@
 								<input type="hidden" name="employeeId" th:value="*{id}">
 								<input class="btn btn-danger shadow mt-5" type="submit" value="削除する(戻せません！)">
 							</form>
-							<a th:href="@{/employeeDetail(employeeId=*{id})}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a>
+							<a th:href="@{/employeeDetail(employeeId=*{id})}"><input class="btn btn-secondary shadow my-5" type="button" value="戻る"></a>
 						</div>
 					</div>
 				</div>

@@ -28,7 +28,7 @@ public class EmployeeList {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			//社員一覧取得
@@ -42,7 +42,7 @@ public class EmployeeList {
 			model.addAttribute("ageMax", 65);
 			/*ここまでJavaScript用*/
 			
-			return "employeeList";
+			return "employeeList/employeeList";
 		}
 	}
 	
@@ -115,6 +115,6 @@ public class EmployeeList {
 		}else {
 			employeeListOpen(model);
 		}
-		return "employeeList";
+		return "employeeList/employeeList";
 	}
 }

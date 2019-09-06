@@ -26,7 +26,7 @@ public class MessageList {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			//全ての連絡事項を取得
@@ -37,7 +37,7 @@ public class MessageList {
 				model.addAttribute("noMessage", true);
 			}
 			
-			return "messageList";
+			return "messageList/messageList";
 		}
 	}
 	
@@ -53,6 +53,6 @@ public class MessageList {
 		}
 		model.addAttribute("noConfirm", true);
 		
-		return "messageList";
+		return "messageList/messageList";
 	}
 }

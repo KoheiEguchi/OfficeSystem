@@ -28,21 +28,21 @@ public class EmployeeDelete {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			//管理人専用ページを開いて良いか確認
 			boolean admin = common.isOpenAdminPage(model);
 			//管理人でない場合
 			if(admin == false) {
-				return "index";
+				return "other/index";
 			//管理人の場合
 			}else {
 				//削除する社員の情報を取得
 				List<Employee> employeeData = employeeRep.employeeData(employeeId);
 				model.addAttribute("employeeData", employeeData);
 				
-				return "employeeDelete";
+				return "employeeList/employeeDelete";
 			}
 		}
 	}
@@ -54,6 +54,6 @@ public class EmployeeDelete {
 		model.addAttribute("msg", "社員を削除しました。");
 		
 		employeeList.employeeListOpen(model);
-		return "employeeList";
+		return "employeeList/employeeList";
 	}
 }

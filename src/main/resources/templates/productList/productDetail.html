@@ -6,8 +6,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<div class="h1 mt-5">商品詳細</div>
-				<div th:replace="replace::msg"></div>
+				<div th:replace="replace::pageTitle('商品詳細')"></div>
 			</div>
 			<div class="col-1"></div>
 			<div class="col-10">
@@ -90,7 +89,7 @@
 				</table>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-12"><a th:href="@{/productList}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a></div>
+			<div class="col-12"><a th:href="@{/productList}"><input class="btn btn-secondary shadow my-5" type="button" value="戻る"></a></div>
 		</div>
 	</div>
 </body>

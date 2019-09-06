@@ -27,13 +27,13 @@ public class MessageDetail {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			List<Message> messageData = messageRep.getMessage(messageId);
 			model.addAttribute("messageData", messageData);
 			
-			return "messageDetail";
+			return "messageList/messageDetail";
 		}
 	}
 	
@@ -44,6 +44,6 @@ public class MessageDetail {
 		model.addAttribute("msg", "連絡を確認しました。");
 		
 		messageDetailOpen(messageId, model);
-		return "messageDetail";
+		return "messageList/messageDetail";
 	}
 }

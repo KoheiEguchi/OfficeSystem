@@ -30,14 +30,14 @@ public class EmployeeUpdate {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			//管理人専用ページを開いて良いか確認
 			boolean admin = common.isOpenAdminPage(model);
 			//管理人でない場合
 			if(admin == false) {
-				return "index";
+				return "other/index";
 			//管理人の場合
 			}else {
 				//社員の情報を取得
@@ -45,7 +45,7 @@ public class EmployeeUpdate {
 				model.addAttribute("employeeData", employeeData);
 				model.addAttribute("employeeId", employeeId);
 				
-				return "employeeUpdate";
+				return "employeeList/employeeUpdate";
 			}
 		}
 	}
@@ -63,7 +63,7 @@ public class EmployeeUpdate {
 		if(loginCheck == null) {
 			model.addAttribute("msg", "ログインできません。");
 			employeeUpdateOpen(employeeId, model);
-			return "employeeUpdate";
+			return "employeeList/employeeUpdate";
 		//ログインできた場合
 		}else {
 			// 入力ミスの確認用
@@ -121,11 +121,11 @@ public class EmployeeUpdate {
 				model.addAttribute("msg", "社員情報を更新しました。");
 				
 				employeeDetail.employeeDetailOpen(employeeId, model);
-				return "employeeDetail";
+				return "employeeList/employeeDetail";
 			//正しくない入力があった場合
 			}else {
 				employeeUpdateOpen(employeeId, model);
-				return "employeeUpdate";
+				return "employeeList/employeeUpdate";
 			}
 		}
 	}

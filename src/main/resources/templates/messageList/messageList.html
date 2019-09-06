@@ -6,10 +6,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<div class="h1 mt-5">連絡事項</div>
-				<div th:replace="replace::msg"></div>
+				<div th:replace="replace::pageTitle('連絡事項')"></div>
 				<br>
-				<a th:href="@{/messagePost}"><input class="btn btn-success shadow my-4" type="button" value="連絡事項を投稿する"></a>
+				<a th:href="@{/messagePost}"><input class="btn btn-primary shadow my-4" type="button" value="連絡事項を投稿する"></a>
 				<div th:if="${noConfirm != true}">
 					<form th:action="messageList" method="post">
 						<input class="btn btn-warning shadow my-2" type="submit" value="未確認のものだけ表示">
@@ -23,7 +22,7 @@
 			</div>
 			<div class="col-1"></div>
 			<div class="col-10">
-				<table class="table table-bordered table-hover">
+				<table class="table table-bordered table-hover mt-4">
 					<thead>
 						<tr>
 							<th>連絡日時</th><th>連絡者</th><th>内容</th><th>確認</th><th></th>
@@ -57,7 +56,7 @@
 				</div>
 			</div>
 			<div class="col-1"></div>
-			<div class="col-12"><a th:href="@{/index}"><input class="btn btn-secondary shadow my-4" type="button" value="戻る"></a></div>
+			<div class="col-12"><a th:href="@{/index}"><input class="btn btn-secondary shadow my-5" type="button" value="戻る"></a></div>
 		</div>
 	</div>
 </body>

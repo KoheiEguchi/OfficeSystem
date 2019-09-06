@@ -28,7 +28,7 @@ public class ProductList {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			//商品一覧取得
@@ -41,7 +41,7 @@ public class ProductList {
 				//管理人である
 			}
 			
-			return "productList";
+			return "productList/productList";
 		}
 	}
 	
@@ -80,6 +80,6 @@ public class ProductList {
 			model.addAttribute("msg", "商品を追加しました。");
 		}
 		productListOpen(model);
-		return "productList";
+		return "productList/productList";
 	}
 }

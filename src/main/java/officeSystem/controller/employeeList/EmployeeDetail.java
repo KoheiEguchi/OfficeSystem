@@ -30,7 +30,7 @@ public class EmployeeDetail {
 		int viewerId = common.isLogin(model);
 		//ログインしていない場合
 		if(viewerId == 0) {
-			return "login";
+			return "other/login";
 		//ログインしている場合
 		}else {
 			//社員の情報を取得
@@ -48,7 +48,7 @@ public class EmployeeDetail {
 				//管理人である
 			}
 			
-			return "employeeDetail";
+			return "employeeList/employeeDetail";
 		}
 	}
 }
