@@ -20,7 +20,7 @@ public class MessageList {
 	MessageRepository messageRep;
 	
 	//連絡事項ページを開く
-	@GetMapping("messageList")
+	@GetMapping("/messageList")
 	public String messageListOpen(Model model) {
 		//ログイン確認
 		int viewerId = common.isLogin(model);

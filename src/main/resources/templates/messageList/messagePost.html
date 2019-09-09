@@ -17,14 +17,14 @@
 						</div>
 						<div class="col-md-6 col-xs-12 text-left my-1">連絡者</div>
 						<div class="col-md-6 col-xs-12 text-right my-1">
-							<input type="text" name="name" th:value="${viewerName}" placeholder="連絡者" autofocus>
+							<input type="text" name="name" th:value="${viewerName}" placeholder="連絡者">
 						</div>
 						<div th:if="${messageCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('連絡内容を入力してください。')"></div>
 						</div>
 						<div class="col-md-2 col-xs-12 text-left my-1">内容</div>
 						<div class="col-md-10 col-xs-12 text-right my-1">
-							<textarea name="message" cols="80" rows="10" placeholder="連絡内容"></textarea>
+							<textarea class="longText" name="message" cols="80" rows="10" placeholder="連絡内容" autofocus></textarea>
 						</div>
 						<div class="col-12"><input class="btn btn-primary shadow my-4" type="submit" value="投稿"></div>
 					</div>

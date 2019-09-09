@@ -17,6 +17,11 @@ body {
 	outline: none;
 }
 
+/* エラーメッセージの両端を広げる */
+.alert {
+	padding: .75rem 0 !important;
+}
+
 /* 文を原則中央配置にする */
 div, p {
 	text-align: center;

@@ -26,7 +26,7 @@ public class ProductDetail {
 	TransportRepository transportRep;
 	
 	//商品詳細ページを表示
-	@GetMapping("productDetail")
+	@GetMapping("/productDetail")
 	public String productDetailOpen(@RequestParam("productId")int productId, Model model) {
 		//ログイン確認
 		int viewerId = common.isLogin(model);
@@ -54,7 +54,7 @@ public class ProductDetail {
 	}
 	
 	//入出荷
-	@PostMapping("transport")
+	@PostMapping("/transport")
 	public String transport(@RequestParam("stock")int stock, @RequestParam("productId")int productId, 
 			@RequestParam("strQuantity")String strQuantity, @RequestParam("rOrS")String rOrS, Model model) {
 		//担当者名を取得

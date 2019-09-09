@@ -20,7 +20,7 @@ public class MessagePost {
 	MessageRepository messageRep;
 	
 	//連絡投稿ページを開く
-	@GetMapping("messagePost")
+	@GetMapping("/messagePost")
 	public String messagePostOpen(Model model) {
 		//ログイン確認
 		int viewerId = common.isLogin(model);
@@ -36,7 +36,7 @@ public class MessagePost {
 		}
 	}
 	
-	@PostMapping("messagePost")
+	@PostMapping("/messagePost")
 	public String messagePost(@RequestParam("name")String name, @RequestParam("message")String message, Model model) {
 		// 入力ミスの確認用
 		boolean formCheck = true;

@@ -22,7 +22,7 @@ public class ProductList {
 	ProductRepository productRep;
 	
 	//商品管理ページを表示
-	@GetMapping("productList")
+	@GetMapping("/productList")
 	public String productListOpen(Model model) {
 		//ログイン確認
 		int viewerId = common.isLogin(model);
@@ -46,7 +46,7 @@ public class ProductList {
 	}
 	
 	//新商品を追加
-	@PostMapping("addNewProduct")
+	@PostMapping("/addNewProduct")
 	public String addNewProduct(@RequestParam("name")String name, @RequestParam("strQuantity")String strQuantity, @RequestParam("place")String place, 
 			Model model) {
 		// 入力ミスの確認用
