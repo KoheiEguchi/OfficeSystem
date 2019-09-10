@@ -17,9 +17,13 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
 	@Query(value = "SELECT * FROM message ORDER BY contact_date DESC", nativeQuery = true)
 	public List<Message> allMessage();
 	
-	//未確認の連絡事項を取得
+	//未確認の連絡事項取得
 	@Query(value = "SELECT * FROM message WHERE confirm = '未確認' ORDER BY contact_date DESC", nativeQuery = true)
 	public List<Message> noConfirmMessage();
+	
+	//最新の連絡事項取得
+	@Query(value = "SELECT * FROM message ORDER BY contact_date DESC LIMIT 1", nativeQuery = true)
+	public List<Message> getNewMessage();
 	
 	//連絡詳細取得
 	@Query(value = "SELECT * FROM message WHERE id = :id", nativeQuery = true)

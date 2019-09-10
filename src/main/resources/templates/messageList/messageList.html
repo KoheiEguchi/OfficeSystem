@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="replace::head('連絡事項')"></head>
-<body>
+<body onload="tableNoConfirmTextRed()">
 	<div th:replace="replace::header"></div>
 	<div class="container">
 		<div class="row">
@@ -9,7 +9,7 @@
 				<div th:replace="replace::pageTitle('連絡事項')"></div>
 				<br>
 				<a th:href="@{/messagePost}"><input class="btn btn-primary shadow my-4" type="button" value="連絡事項を投稿する"></a>
-				<div th:if="${noConfirm != true}">
+				<!-- <div th:if="${noConfirm != true}">
 					<form th:action="messageList" method="post">
 						<input class="btn btn-warning shadow my-2" type="submit" value="未確認のものだけ表示">
 					</form>
@@ -18,7 +18,9 @@
 					<form th:action="messageList" method="get">
 						<input class="btn btn-warning shadow my-2" type="submit" value="全て表示">
 					</form>
-				</div>
+				</div> -->
+				<br>
+				<input id="btnText" class="btn btn-warning shadow my-2" type="button" value="未確認のものだけ表示" onclick="changeOnlyNoConfirm()">
 			</div>
 			<div class="col-1"></div>
 			<div class="col-10">
@@ -28,7 +30,7 @@
 							<th>連絡日時</th><th>連絡者</th><th>内容</th><th>確認</th><th></th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="messages">
 						<tr th:inline="text" th:each="message: ${messageList}" th:object="${message}">
 							<td>[[*{#calendars.format(contactDate, 'yyyy年M月d日 k時m分s秒')}]]</td>
 							<td>[[*{contactName}]]</td>

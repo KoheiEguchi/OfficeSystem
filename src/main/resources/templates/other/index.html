@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="replace::head('目次')"></head>
-<body>
+<body onload="tableNoConfirmTextRed()">
 	<div th:replace="replace::header"></div>
 	<div class="container">
 		<div class="row indexColumn">
 			<div class="col-12">
 				<div th:replace="replace::pageTitle('目次')"></div>
+				<br>
+				<div class="h4">最新の連絡事項</div>
 			</div>
+			<table class="table table-bordered mb-5">
+				<thead>
+					<tr>
+						<th>連絡日時</th><th>連絡者</th><th>内容</th><th>確認</th><th></th>
+					</tr>
+				</thead>
+				<tbody id="messages">
+					<tr th:inline="text" th:each="message: ${newMessage}" th:object="${message}">
+						<td>[[*{#calendars.format(contactDate, 'yyyy年M月d日 k時m分s秒')}]]</td>
+						<td>[[*{contactName}]]</td>
+						<td>
+							<th:block th:if=*{message}>
+								<th:block th:each="oneLineMessage, messageZone : *{message.split('\r\n|\r|\n', -1)}">
+									<div th:if="${messageZone.first}">
+										<div class="textShort"><th:block>[[${oneLineMessage}]]</th:block></div>
+									</div>
+									<div th:if="${!messageZone.first}" class="d-none"></div>
+								</th:block>
+							</th:block>
+						</td>
+						<td>[[*{confirm}]]</td>
+						<td>
+							<a th:href="@{/messageDetail(messageId=*{id})}">
+								<input class="btn btn-success btn-sm shadow w-100" type="button" value="詳細">
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 			<div class="col-md-6 col-xs-12 bg-info shadow indexLinkArea">
 				<a class="indexLink indexWorkTime" th:href="@{/workTimeCheck}"><span class="h1 text-light indexLinkContent">出退勤管理</span></a>
 			</div>

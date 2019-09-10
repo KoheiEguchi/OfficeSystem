@@ -32,6 +32,15 @@ div, p {
 	outline: none;
 }
 
+.hiddenLine {
+	display: none;
+}
+/* 「未確認」を太い赤字にする */
+.noConfirm {
+	color: #dc3545;
+	font-weight: bold;
+}
+
 /* 小画面でテーブル以外の情報表示を中央揃えにする */
 @media screen and (max-width: 640px) {
 	.text-left, .text-right {

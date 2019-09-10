@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="replace::head('連絡詳細')"></head>
-<body>
+<body onload="noConfirmTextRed()">
 	<div th:replace="replace::header"></div>
 	<div class="container">
 		<div class="row">
@@ -26,7 +26,7 @@
 							</th:block>
 						</div>
 						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">確認</div>
-						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{confirm}]]</div>
+						<div id="confirm" class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{confirm}]]</div>
 						<div class="col-12" th:if="*{confirm == '未確認'}">
 							<form th:action="@{/messageDetail}" method="post">
 								<input type="hidden" name="messageId" th:value=*{id}>

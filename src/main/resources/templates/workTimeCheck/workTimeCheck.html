@@ -84,10 +84,7 @@
 		</div>
 	</div>
 	<script th:inline="javascript">
-		var department = [[${department}]];
-		if(department != null){
-			document.getElementById("department").value = department;
-		}		
+		window.onload = workTimeRefine([[${department}]]);		
 	</script>
 </body>
 </html>

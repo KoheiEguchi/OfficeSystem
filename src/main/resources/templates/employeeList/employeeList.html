@@ -71,27 +71,7 @@
 		</div>
 	</div>
 	<script th:inline="javascript">
-		var name = [[${name}]];
-		var ageMin = [[${ageMin}]];
-		var ageMax = [[${ageMax}]];
-		var department = [[${department}]];
-		var position = [[${position}]];
-		
-		if(name != null){
-			document.getElementById("name").value = name;
-		}
-		if(ageMin != null){
-			document.getElementById("ageMin").value = ageMin;
-		}
-		if(ageMax != null){
-			document.getElementById("ageMax").value = ageMax;
-		}
-		if(department != null){
-			document.getElementById("department").value = department;
-		}
-		if(position != null){
-			document.getElementById("position").value = position;
-		}
+		window.onload = employeeRefine([[${name}]], [[${ageMin}]], [[${ageMax}]], [[${department}]], [[${position}]]);
 	</script>
 </body>
 </html>
