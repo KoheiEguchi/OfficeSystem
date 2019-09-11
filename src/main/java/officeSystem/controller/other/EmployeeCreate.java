@@ -1,5 +1,7 @@
 package officeSystem.controller.other;
 
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +37,10 @@ public class EmployeeCreate {
 		if(name.equals("") || nameRuby.equals("")) {
 			formCheck = false;
 			model.addAttribute("nameCheck", true);
+		//名前が全角カナでない場合
+		}else if(Pattern.matches("^[ァ-ヶー]*$", nameRuby) == false) {
+			formCheck = false;
+			model.addAttribute("nameRubyCheck", true);
 		}
 		
 		int age = employeeCreateData.getAge();

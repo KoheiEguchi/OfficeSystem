@@ -2,8 +2,7 @@
 function tableNoConfirmTextRed(){
 	var trConfirm = $("#messages tr");
 	for(var i = 0; i < trConfirm.length; i++){
-		var line = $(trConfirm[i]);
-		var confirm = line.children("td")[3];
+		var confirm = $(trConfirm[i]).children("td")[3];
 		noConfirm(confirm);
 	}
 }
@@ -22,34 +21,27 @@ function noConfirm(confirm){
 //連絡事項のうち確認済のものを非表示にするか切り替える
 function changeOnlyNoConfirm(){
 	var btnText = document.getElementById("btnText");
+	
+	//toggleは列を消したらtrue、戻したらfalse
+	var toggle = toggleHiddenLine();
 	//確認済みのものを非表示にする場合
-	if(btnText.value == "未確認のものだけ表示"){
-		var trConfirm = $("#messages tr");
-		for(var i = 0; i < trConfirm.length; i++){
-			var line = $(trConfirm[i]);
-			var confirm = line.children("td")[3];
-			//「確認済」の列を非表示にする
-			if(confirm.innerHTML == "確認済"){
-				alert(line);
-				line.classList.add("hiddenLine");  //lineがtr要素を持っていないためaddができない
-			}
-		}
-		alert("c");
+	if(toggle){
 		btnText.value = "全て表示";
 	//全ての連絡事項を表示する場合
-	}else{											//まだ手付かず
-		var trConfirm = $("#messages tr");
-		for(var i = 0; i < trConfirm.length; i++){
-			var line = $(trConfirm[i]);
-			var confirm = line.children("td")[3];
-			if(confirm.innerHTML == "確認済"){
-				var messageLine = document.getElementById("messageLine");
-				messageLine.classList.add("hiddenLine");
-			}
-		}
+	}else{
 		btnText.value = "未確認のものだけ表示";
 	}
-	alert("e");
+}
+//上での非表示化処理
+function toggleHiddenLine(){
+	var trConfirm = $("#messages tr");
+	for(var i = 0; i < trConfirm.length; i++){
+		//各列を参照し「確認済」の列のhiddenLineを切り替える
+		if($(trConfirm[i]).children("td")[3].innerHTML == "確認済"){
+			 var toggle = trConfirm[i].classList.toggle("hiddenLine");
+		}
+	}
+	return toggle;
 }
 
 //出退勤の部署絞り込み条件を残す

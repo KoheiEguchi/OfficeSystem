@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import officeSystem.model.Message;
 import officeSystem.repository.MessageRepository;
@@ -39,20 +38,5 @@ public class MessageList {
 			
 			return "messageList/messageList";
 		}
-	}
-	
-	//未確認の連絡事項を表示する
-	@PostMapping("/messageList")
-	public String messageList(Model model) {
-		//未確認の連絡事項を取得
-		List<Message> messageList = messageRep.noConfirmMessage();
-		model.addAttribute("messageList", messageList);
-		//連絡がない場合
-		if(messageList.isEmpty() == true) {
-			model.addAttribute("noMessage", true);
-		}
-		model.addAttribute("noConfirm", true);
-		
-		return "messageList/messageList";
 	}
 }

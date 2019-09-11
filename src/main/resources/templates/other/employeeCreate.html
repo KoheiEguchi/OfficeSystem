@@ -14,12 +14,15 @@
 						<div th:if="${nameCheck == true}" class="col-12 mt-4">
 							<div th:replace="replace::entryErr('名前を入力してください。')"></div>
 						</div>
-						<div class="col-md-2 col-xs-12 text-left my-1">名前</div>
-						<div class="col-md-10 col-xs-12 text-right my-1">
+						<div class="col-md-6 col-xs-12 text-left my-1">名前</div>
+						<div class="col-md-6 col-xs-12 text-right my-1">
 							<input type="text" name="name" placeholder="名前" autofocus>
 						</div>
-						<div class="col-md-2 col-xs-12 text-left my-1">読み</div>
-						<div class="col-md-10 col-xs-12 text-right my-1">
+						<div th:if="${nameRubyCheck == true}" class="col-12 mt-4">
+							<div th:replace="replace::entryErr('読みは全角カナで入力してください。')"></div>
+						</div>
+						<div class="col-md-6 col-xs-12 text-left my-1">読み(全角カナ)</div>
+						<div class="col-md-6 col-xs-12 text-right my-1">
 							<input type="text" name="nameRuby" placeholder="ナマエ">
 						</div>
 						<div th:if="${ageCheck == true}" class="col-12 mt-4">

@@ -24,7 +24,10 @@
 									<div class="col-md-6 col-xs-12 text-right my-1">
 										<input type="text" name="name" th:value="*{name}" placeholder="名前">
 									</div>
-									<div class="col-md-6 col-xs-12 text-left my-1">読み</div>
+									<div th:if="${nameRubyCheck == true}" class="col-12 mt-4">
+										<div th:replace="replace::entryErr('読みは全角カナで入力してください。')"></div>
+									</div>
+									<div class="col-md-6 col-xs-12 text-left my-1">読み(全角カナ)</div>
 									<div class="col-md-6 col-xs-12 text-right my-1">
 										<input type="text" name="nameRuby" th:value="*{nameRuby}" placeholder="ナマエ">
 									</div>

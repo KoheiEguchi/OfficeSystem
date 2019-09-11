@@ -32,9 +32,6 @@ div, p {
 	outline: none;
 }
 
-.hiddenLine {
-	display: none;
-}
 /* 「未確認」を太い赤字にする */
 .noConfirm {
 	color: #dc3545;
@@ -46,6 +43,10 @@ div, p {
 	.text-left, .text-right {
 		text-align: center !important;
 	}
+}
+/* 連絡事項において「確認済」の列を非表示にする */
+.hiddenLine {
+	display: none;
 }
 
 /* 一行で説明を省略する */
