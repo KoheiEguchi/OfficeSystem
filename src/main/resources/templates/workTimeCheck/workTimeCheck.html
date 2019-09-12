@@ -40,11 +40,11 @@
 									<input type="hidden" name="name" th:value="*{name}">
 									<div th:if="*{working == 0}">
 										<input type="hidden" name="time" value="begin">
-										<input class="btn btn-info btn-sm shadow w-100" type="submit" value="出勤">
+										<input class="btn btn-info btn-sm shadow w-100" type="submit" value="出勤しました">
 									</div>
 									<div th:if="*{working == 1}">
 										<input type="hidden" name="time" value="finish">
-										<input class="btn btn-warning btn-sm shadow w-100" type="submit" value="退勤">
+										<input class="btn btn-warning btn-sm shadow w-100" type="submit" value="退勤します">
 									</div>
 								</form>
 							</td>

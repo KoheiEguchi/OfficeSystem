@@ -7,6 +7,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div th:replace="replace::pageTitle('商品削除')"></div>
+				<div class="h4 mt-4">この商品を一覧から削除しますか？</div>
 			</div>
 			<div class="col-md-3 col-xs-1"></div>
 			<div class="col-md-6 col-xs-10">
@@ -19,9 +20,9 @@
 						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">管理場所</div>
 						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{place}]]</div>
 						<div class="col-12">
-							<form th:action="@{/productDelete}" method="post">
+							<form th:action="@{/productDelete}" method="post" onsubmit="return deleteCheck()">
 								<input type="hidden" name="productId" th:value="*{id}">
-								<input class="btn btn-danger shadow mt-5" type="submit" value="削除する(戻せません！)">
+								<input class="btn btn-danger shadow mt-5" type="submit" value="削除する">
 							</form>
 							<a th:href="@{/productDetail(productId=*{id})}"><input class="btn btn-secondary shadow my-5" type="button" value="戻る"></a>
 						</div>

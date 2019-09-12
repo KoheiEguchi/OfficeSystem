@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-12">
 				<div th:replace="replace::pageTitle('社員削除')"></div>
-				<div class="mt-4">こちらの社員を一覧から削除しますか？</div>
+				<div class="h4 mt-4">こちらの社員を一覧から削除しますか？</div>
 			</div>
 			<div class="col-md-3 col-xs-1"></div>
 			<div class="col-md-6 col-xs-10">
@@ -26,9 +26,9 @@
 						<div class="col-md-6 col-xs-12 text-left my-1 border-bottom">入社日時</div>
 						<div class="col-md-6 col-xs-12 text-right my-1 border-bottom">[[*{#calendars.format(joinDate, 'yyyy年M月d日 k時m分s秒')}]]</div>
 						<div class="col-12">
-							<form th:action="@{/employeeDelete}" method="post">
+							<form th:action="@{/employeeDelete}" method="post" onsubmit="return deleteCheck()">
 								<input type="hidden" name="employeeId" th:value="*{id}">
-								<input class="btn btn-danger shadow mt-5" type="submit" value="削除する(戻せません！)">
+								<input class="btn btn-danger shadow mt-5" type="submit" value="削除する">
 							</form>
 							<a th:href="@{/employeeDetail(employeeId=*{id})}"><input class="btn btn-secondary shadow my-5" type="button" value="戻る"></a>
 						</div>

@@ -68,3 +68,13 @@ function employeeRefine(name, ageMin, ageMax, department, position){
 		document.getElementById("position").value = position;
 	}
 }
+
+//社員、商品削除時に確認する
+function deleteCheck(){
+	if(confirm("本当に削除しますか？(戻せません！)")){
+		return true;
+	}else{
+		alert("削除を中止しました。");
+		return false;
+	}
+}
