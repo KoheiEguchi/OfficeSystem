@@ -18,7 +18,7 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
 	public List<Message> allMessage();
 	
 	//最新の連絡事項取得
-	@Query(value = "SELECT * FROM message ORDER BY contact_date DESC LIMIT 1", nativeQuery = true)
+	@Query(value = "SELECT * FROM message ORDER BY contact_date DESC LIMIT 3", nativeQuery = true)
 	public List<Message> getNewMessage();
 	
 	//連絡詳細取得
