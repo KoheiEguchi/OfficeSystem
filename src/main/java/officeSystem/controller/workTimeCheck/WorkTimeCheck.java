@@ -65,6 +65,11 @@ public class WorkTimeCheck {
 				//指定日の出退勤情報を取得
 				List<WorkTime> workTimeList = workTimeRep.getWorkTime(selectDate);
 				model.addAttribute("workTimeList", workTimeList);
+				//誰も出勤していない場合
+				if(workTimeList.isEmpty()) {
+					model.addAttribute("noWorking", true);
+				}
+				
 				//日付表示用
 				model.addAttribute("workDate", selectDate);
 			}
